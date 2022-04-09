@@ -24,7 +24,7 @@ description: >- # this means to ignore newlines until "baseurl:"
   snake_cases is a programming blog that shares my adventures and findings
   about programming in general, you'll find cool stuff like games, websites,
   art, and everything in-between!
-baseurl: "" # the subpath of your site, e.g. /blog
+baseurl: "/snake_cases" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  helaxious
 instagram_username: helaxious

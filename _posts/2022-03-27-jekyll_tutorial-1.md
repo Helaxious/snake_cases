@@ -2,6 +2,46 @@
 layout: post
 ---
 
+<!-- TOC -->
+
+- [Case: How I made this website using jekyll (and github pages)](#case-how-i-made-this-website-using-jekyll-and-github-pages)
+    - [Introduction](#introduction)
+    - [Cool features of Jekyll](#cool-features-of-jekyll)
+    - [But what's a static site?](#but-whats-a-static-site)
+    - [Pre-requesites](#pre-requesites)
+    - [Making a bare-bones website](#making-a-bare-bones-website)
+        - [Creating a brand new project](#creating-a-brand-new-project)
+        - [Folder stucture](#folder-stucture)
+        - [Running and checking our website](#running-and-checking-our-website)
+    - [Creating posts](#creating-posts)
+        - [How to create a post](#how-to-create-a-post)
+        - [Making a post](#making-a-post)
+            - [The Front Matter](#the-front-matter)
+            - [Making the rest of the post](#making-the-rest-of-the-post)
+- [Hi, i'm a heading](#hi-im-a-heading)
+    - [Working with images](#working-with-images)
+    - [Organizing your posts](#organizing-your-posts)
+    - [Tip: Working with drafts](#tip-working-with-drafts)
+    - [Customizing our blog, and applying a theme and a plugin](#customizing-our-blog-and-applying-a-theme-and-a-plugin)
+        - [Getting rid of the placeholders](#getting-rid-of-the-placeholders)
+        - [Editing our blog pages](#editing-our-blog-pages)
+        - [Applying a theme and installing a plugin (optional)](#applying-a-theme-and-installing-a-plugin-optional)
+        - [Installing a plugin](#installing-a-plugin)
+            - [Before you install a theme](#before-you-install-a-theme)
+            - [Installing a theme](#installing-a-theme)
+            - [Doing some adjustments](#doing-some-adjustments)
+    - [Hosting the blog with Github Pages](#hosting-the-blog-with-github-pages)
+        - [Creating an empty Github Repository](#creating-an-empty-github-repository)
+        - [Setting up `jekyll-deploy-action`](#setting-up-jekyll-deploy-action)
+        - [Creating `gh-pages` branch](#creating-gh-pages-branch)
+        - [Uploading our project](#uploading-our-project)
+        - [Going to our website](#going-to-our-website)
+        - [Updating `_config.yml`](#updating-_configyml)
+        - [How to publish our posts](#how-to-publish-our-posts)
+    - [Sources](#sources)
+
+<!-- /TOC -->
+
 # Case: How I made this website using jekyll (and github pages)
 
 Part one of a series where I share what I have learned on Jekyll, and document my work on this blog, while condensing information into a bite-sized guide. On this post, I will walk you to start to end, starting with installing Jekyll, till hosting a pretty, totally functional blog on Github Pages, configured with with as minimal distractions as possible, while being begginer-friendly.
@@ -788,16 +828,29 @@ remote: Total 5 (delta 0), reused 0 (delta 0), pack-reused 0
 Receiving objects: 100% (5/5), done.
 ```
 
-Now we're going to copy our project's contents over to our new folder, then we're going back to the terminal, go inside our project using `cd`, and tell `git` to add our projects contents, for that, we can use `git add .`, then tell git to apply those changes with `git commit -m "message"`, replacing `message` with your message
+Now we're going to copy our project's contents over to our new folder, then we're going back to the terminal, go inside our project using `cd`, and tell `git` to add our projects contents, for that, we can use `git add .`, then tell git to apply those changes with `git commit -m "your_message_here"`, then we tell git to upload our changes to our Github repository using `git push`.
+
+(If you don't have git setup to use with github, you'll get an error when trying to `git push`. Follow [Github's tutorial on this](https://docs.github.com/en/authentication/connecting-to-github-with-ssh) to set git for Github.)
+
+That's our series of commands we want to do when we update our blog:
+- `git add .`
+- `git commit -m "message"`
+- `git push`
+
+And just like that, we uploaded our project into our Github repository! Because we added `jekyll-deploy-action`, it detected new changes in the `main` branch (the one we uploaded to), built our website, and put in the `gh-pages `branch, that means that, if everything was done correctly, that means that our website is online!
+
+### Going to our website
+
+Let's then go to our awesome website! Our website link is as follows, first our Github username, followed by `.github.io`, and if we named our repository anything other than `github_username.github.io`, where `github_username` is your username, we need to follow the link with a slash and the repository name:
+
+```
+github_username.github.io/repository-name
+```
+
+In my case, my link would be `helaxious.github.io/snake_cases`. Let's go to our website!
 
 
-### Git commands summed up
-
-Let's tell Github to publish our blog using `gh-pages` contents, go to settings, and go to pages, an on `source`, let's select that we want `gh-pages` be the target of publising:
-
-![An image showing the publication settings](/assets/jekyll-tutorial-1/repository-publish-settings.png)
-
-Now let's click on save!
+### Updating `_config.yml`
 
 
 ### How to publish our posts
