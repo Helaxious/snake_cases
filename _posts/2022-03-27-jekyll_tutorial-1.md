@@ -892,8 +892,6 @@ Now, when you're happy with a post, or maybe you want to change something in you
 - `git commit -m "your_message_here"`
 - `git push`
 
-You should get an message like this:
-
 ## Conclusion
 
 <p style="text-align: center">
