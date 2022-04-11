@@ -1,66 +1,68 @@
 ---
 layout: post
+title: "Case: How we made this blog using Jekyll (and Github Pages) [Part 1]"
+permalink: /making-of-snake-cases-1
+date: 2022-04-10
+length: "Long"
 ---
 
-<!-- TOC -->
+Hello detectives, today, I'm going to tell a story, the first case Snakey (our pet snake) and I ever had in snake_cases, how snake_cases was created, our little programming detective agency.
 
-- [Case: How I made this website using jekyll (and github pages)](#case-how-i-made-this-website-using-jekyll-and-github-pages)
-    - [Introduction](#introduction)
-    - [Cool features of Jekyll](#cool-features-of-jekyll)
-    - [But what's a static site?](#but-whats-a-static-site)
-    - [Pre-requesites](#pre-requesites)
-    - [Making a bare-bones website](#making-a-bare-bones-website)
-        - [Creating a brand new project](#creating-a-brand-new-project)
-        - [Folder stucture](#folder-stucture)
-        - [Running and checking our website](#running-and-checking-our-website)
-    - [Creating posts](#creating-posts)
-        - [How to create a post](#how-to-create-a-post)
-        - [Making a post](#making-a-post)
-            - [The Front Matter](#the-front-matter)
-            - [Making the rest of the post](#making-the-rest-of-the-post)
-- [Hi, i'm a heading](#hi-im-a-heading)
-    - [Working with images](#working-with-images)
-    - [Organizing your posts](#organizing-your-posts)
-    - [Tip: Working with drafts](#tip-working-with-drafts)
-    - [Customizing our blog, and applying a theme and a plugin](#customizing-our-blog-and-applying-a-theme-and-a-plugin)
-        - [Getting rid of the placeholders](#getting-rid-of-the-placeholders)
-        - [Editing our blog pages](#editing-our-blog-pages)
-        - [Applying a theme and installing a plugin (optional)](#applying-a-theme-and-installing-a-plugin-optional)
-        - [Installing a plugin](#installing-a-plugin)
-            - [Before you install a theme](#before-you-install-a-theme)
-            - [Installing a theme](#installing-a-theme)
-            - [Doing some adjustments](#doing-some-adjustments)
-    - [Hosting the blog with Github Pages](#hosting-the-blog-with-github-pages)
-        - [Creating an empty Github Repository](#creating-an-empty-github-repository)
-        - [Setting up `jekyll-deploy-action`](#setting-up-jekyll-deploy-action)
-        - [Creating `gh-pages` branch](#creating-gh-pages-branch)
-        - [Uploading our project](#uploading-our-project)
-        - [Going to our website](#going-to-our-website)
-        - [Updating `_config.yml`](#updating-_configyml)
-        - [How to publish our posts](#how-to-publish-our-posts)
-    - [Sources](#sources)
+And I'm not talking about filling out paperwork, renting an apartment and buying magnifying glasses, I'm talking about this very blog, where we document our code cases.
 
-<!-- /TOC -->
+Buckle up, because this is a long case, prepare your monocles, your notebooks, and your magnifying glasses, because this is a *long* case to cover.
 
-# Case: How I made this website using jekyll (and github pages)
+## Table of contents:
 
-Part one of a series where I share what I have learned on Jekyll, and document my work on this blog, while condensing information into a bite-sized guide. On this post, I will walk you to start to end, starting with installing Jekyll, till hosting a pretty, totally functional blog on Github Pages, configured with with as minimal distractions as possible, while being begginer-friendly.
+- [Introduction](#introduction)
+- [Cool features of Jekyll](#cool-features-of-jekyll)
+- [But what's a static site?](#but-whats-a-static-site)
+- [Pre-requisites](#pre-requisites)
+- [Making a bare-bones website](#making-a-bare-bones-website)
+    - [Creating a brand new project](#creating-a-brand-new-project)
+    - [Folder structure](#folder-structure)
+    - [Running and checking our website](#running-and-checking-our-website)
+- [Creating posts](#creating-posts)
+    - [How to create a post](#how-to-create-a-post)
+    - [Making a post](#making-a-post)
+        - [The Front Matter](#the-front-matter)
+        - [Making the rest of the post](#making-the-rest-of-the-post)
+- [Working with images](#working-with-images)
+- [Organizing your posts](#organizing-your-posts)
+- [Tip: Working with drafts](#tip-working-with-drafts)
+- [Customizing our blog, and applying a theme and a plugin](#customizing-our-blog-and-applying-a-theme-and-a-plugin)
+    - [Getting rid of the placeholders](#getting-rid-of-the-placeholders)
+    - [Editing our blog pages](#editing-our-blog-pages)
+    - [Applying a theme and installing a plugin (optional)](#applying-a-theme-and-installing-a-plugin-optional)
+    - [Installing a plugin](#installing-a-plugin)
+        - [Before you install a theme](#before-you-install-a-theme)
+        - [Installing a theme](#installing-a-theme)
+        - [Doing some adjustments](#doing-some-adjustments)
+- [Hosting the blog with Github Pages](#hosting-the-blog-with-github-pages)
+    - [Creating an empty Github Repository](#creating-an-empty-github-repository)
+    - [Setting up `jekyll-deploy-action`](#setting-up-jekyll-deploy-action)
+    - [Creating `gh-pages` branch](#creating-gh-pages-branch)
+    - [Uploading our project](#uploading-our-project)
+    - [Going to our website](#going-to-our-website)
+    - [Publishing our changes to our website](#publishing-our-changes-to-our-website)
+- [Conclusion](#conclusion)
+- [Sources](#sources)
 
 ## Introduction
 
-While you're reading this blog. You might be curious on how it was built, it's really simple.
-
-In this post I will show how I built this site using `Jekyll`, a simple to use static site generator (I'll explain what's that soon), making a post is as simple as writing a markdown file.
+In this case, we will show how we built this blog using `Jekyll`, a simple to use static site generator (I'll explain what's that soon).
 
 And we'll use `Github Pages`, A service provided by Github that allows you to host for free a static website with a `github.io` domain.
 
+This is part one of a series where we share what we have learned on Jekyll, and document our work on snake_cases. In this case, this will be more of a guide on using Jekyll, in the later parts, it will be more of me showing my work done in this blog.
+
 ## Cool features of Jekyll
 
-- A Jekyll blog is as easy to get it running as running 4 commands
-- A newly created blog comes already pre-installed with everything you need to start working right away, like a functional home page, a nav bar, and even styling applied.
-- All you need to make a blog post is write a markdown file, and you're even able to add HTML, CSS, and even JS, without ever touching a HTML file
-- Jekyll is easy to costumize, there's a bunch of stuff you can costumize, there's also plugins, user-made themes, and more
-- Like I said above, you can use Github Pages to host your Jekyll projects for *free* (no credit card or anything), the reason for this is because Jekyll is a Static Site Generator, and Github Pages only host static websites.
+- Jekyll's strongest point is being *flexible* and *easy* to use.
+- Jekyll makes it very easy to make a blog with no code at all, but is also very flexible for more advanced customization, you can create your blog pages from scratch if you want.
+- All it needs to make a blog post is a markdown file, and you can even include `HTML`, `CSS`, and `JS`.
+- If you're not in the mood for making your own web pages, you can also install user-created themes and plugins, it's as easy as changing two lines.
+- Since Jekyll is a *static site* generator, that means you're able to host it for *free* on Github Pages, actually Github itself [*recommends Jekyll*](https://www.youtube.com/watch?v=2MsN8gpT6jY) for their platform.
 
 ## But what's a static site?
 
@@ -73,55 +75,55 @@ Not being able to do any of that fancy stuff sounds limiting, but you're still a
 - A blog website (like this one)
 - Any website that only needs to serve plain web pages to the user (like a homepage for a software)
 
-And you have the added bonus that static websites, for not doing any extra work besides serving a webpage for the user, you have the benefit of being *fast* and *secure*, and for a blog, this is the perfect solution.
+And you have the added bonus that static websites, for not doing any extra work besides serving a web page for the user, you have the benefit of being *faster* and *secure*, and for a blog, this is the perfect solution.
 
-## Pre-requesites
+## Before we jump in
 
 Before we jump in, we need a few things installed:
 
 - `Ruby` (An interpreted programming language)
-- `Jekyll` (obviously)
-- `Bundler` (A ruby package that will help with some things for us)
+- `Jekyll`
+- `Bundler` (A ruby package that will install additional things for us)
 
-To install `Ruby`, `Jekyll` and `Bundler`, follow the instructions inside [jekyll's website](https://jekyllrb.com/docs/installation/)
+To install `Ruby`, `Jekyll` and `Bundler`, follow the instructions inside [Jekyll's website.](https://jekyllrb.com/docs/installation/)
 
 And if you want to host your blog on Github Pages:
 
-- A `Github` account to host it on github pages (obviously)
-- `git` installed, ready to use with github. If you're using git for the first time, have to set username and email, you'll just need to pull a terminal (or git bash) and type this, replacing your username and your email with your Github email and Github email:
+- A `Github` account to host it on Github pages (obviously).
+- `git` installed, ready to use with Github. If you're using git for the first time, you have to set the username and email, you'll just need to pull a terminal (or git bash) and type this, replacing your username and your email with your Github username and Github email:
 
     ```bash
     git config --global user.name "my_github_username"
     git config --global user.email "my_github_email"
     ```
 
-     and you will also need to [set an ssh key for github,](https://docs.github.com/en/authentication/connecting-to-github-with-ssh) for security purposes.
+     and you will also need to [set an ssh key for github.](https://docs.github.com/en/authentication/connecting-to-github-with-ssh)
 
 ## Making a bare-bones website
 
 ### Creating a brand new project
 
-Now that we installed everything we needed, we can finally create the website, it's as simple as saying `jekyll new project_name` because that's the command we're going to use to create the website folder
+Now that we installed everything we needed, we can finally create the website, it's as simple as saying `jekyll new project`, because that's the command we're going to use to create the website folder.
 
 Pull a terminal (if you're not used to a terminal, don't fret, it's not as scary as it looks) and type the following:
 
-(Substitute 'name_of_your_project' for the name you want to give the folder)
+(Substitute 'name_of_your_project' for the name you want to give the folder).
 
 ```bash
 jekyll new name_of_your_project
 ```
 
-This creates a folder with our jekyll project inside. Make sure to remember the name of your project, because we're going to enter this folder right after
+This creates a folder with our Jekyll project inside. Make sure to remember the name of your project, because we're going to enter this folder right after.
 
 Now, to run the website, first we need to be on the project's folder.
 
-To enter the folder, we're going to use the `cd` command (`cd` command works on Linux/Windows/Mac)
+To enter the folder, we're going to use the `cd` command (`cd` command works on Linux/Windows/Mac).
 
 ```bash
 cd name_of_your_project
 ```
 
-### Folder stucture
+### Folder structure
 
 The inside of the project's folder should be looking similar to this:
 
@@ -139,51 +141,51 @@ example/
 
 Here are the most importants files you may want to know:
 
-- The `_site` folder basically contains the finished product of your blog, Since `_site` is the compilation of your blog, you don't really need to edit this folder.
+- The `_site` folder basically contains the finished product of our blog, Since `_site` is the compiled blog, you don't need to edit this folder.
 
 - The `_posts` folder stores all our blog posts, there's a default showcase post inside.
 
-- `_config.yml` like the name suggests, contains the settings of your website, like name, description, plugins, themes, etc.
+- `_config.yml` like the name suggests, contains the settings of our website, like name, description, plugins, themes, etc.
 
 - `Gemfile` is a ruby file that basically stores the dependencies (other software that is required for our software to run) we need, like `Jekyll` or our blog's default theme `minima`.
 
 ### Running and checking our website
 
-Before we start our website, you should know that we should excecute this command the first time we run our website, remember to be on the root folder:
+Before we start our website, you should know that we need to execute this command the first time we run our website, remember to be on the root folder:
 
 ```bash
 bundle exec jekyll serve
 ```
 
-But you only need to type only once, afterwards, you just need to type this simple command
+But you only need to type only once, afterwards, you can just to type this simple command:
 
 ```bash
 jekyll serve
 ```
 
-The command will spit you some information, and a link to open your glorious website, click on it, or just go to `localhost:4000` (or whatever link your website is set) on any browser, the website should look something like this:
+The command will spit you some information, and a link to open our glorious website, click on it, or just go to `localhost:4000` (or whatever link your website is set) on any browser, the website should look something like this:
 
 ![An image showcasing a brand new Jekyll blog](/assets/jekyll-tutorial-1/jekyll-new-project-showcase.png)
 
 We can see the styling that Jekyll applies on the homepage, along with some links, an about page, an RSS link, and some social media buttons, clicking on the article 'Welcome to Jekyll!' will lead you to this post:
 
-![Another image showcasing the default article on the brand new jekyll blog](/assets/jekyll-tutorial-1/jekyll-default-post.png)
+![Another image showcasing the default article on the brand new Jekyll blog](/assets/jekyll-tutorial-1/jekyll-default-post.png)
 
-This page gives you a bit of an insight on how blog posts on jekyll works.
+This page gives you a bit of an insight on how blog posts on Jekyll works.
 
-You can also observe that the blog posts also have styling applied to them. There's a nice big title, there's a main bar showing the website's name, you can also see in the article's content some highlighted text.
+Like a good detective sharp-eyed detective, we can also observe that the blog posts also have styling applied to them. There's a nice big title, there's a main bar showing the website's name, you can also see in the article's content some highlighted text.
 
-So far, the website looks good, although the theme looks kinda bland, it would be nice to replace the placeholder names with the name of the website, we're gonna do that later.
+So far detectives, the website looks good, although the theme looks kinda bland, it would be nice to replace the placeholder names with the name of the website, we're gonna do that later.
 
 ## Creating posts
 
 ### How to create a post
 
-Now we're going to go to the meat and potatoes of Jekyll, how to create a post, and how to publish it.
+Now we're going onto the meat and potatoes of Jekyll, how to create a post, and how to publish it.
 
 We're going to use markdown to write our posts, but you can also just write a HTML file and it will work just fine.
 
-Markdown is an excellent tool, it's simple to use, and like I said, with Jekyll, you're able to write HTML, CSS, *and* *even* JS, with Jekyll, here's an example:
+Markdown is an excellent tool, markdown is like an potato, it's versatile, it's simple to use, loved by many, and like I said, with Jekyll, you're able to write HTML, CSS, *and even* JS, with Jekyll, here's an example:
 
 <style>
     .button-square {
@@ -194,7 +196,7 @@ Markdown is an excellent tool, it's simple to use, and like I said, with Jekyll,
         align-items: center;
     }
 
-    .red-square {
+    #blue-square {
         margin-top: 0.1in;
         margin-bottom: 0.1in;
         width: 1in;
@@ -205,19 +207,24 @@ Markdown is an excellent tool, it's simple to use, and like I said, with Jekyll,
 
 <script>
 function buttonThingy() {
-    alert("Pretty wild right?")
+    var r = Math.round(Math.random()*256);
+    var g = Math.round(Math.random()*256);
+    var b = Math.round(Math.random()*256);
+
+    var square = document.getElementById("blue-square");
+    square.style.background = `rgb(${r}, ${g}, ${b})`;
 }
 </script>
 
 <div class="button-square">
-<div class="red-square"></div>
+    <div id="blue-square"></div>
 
 <button onclick="buttonThingy()">Click me</button>
 </div>
 
 Pretty wild right?
 
-Well, turns out, Jekyll also made posting on our blog super simple to do, if you read the default blog post in your website, you'll notice this piece of text:
+Well, turns out, Jekyll also made posting on our blog super simple to do, if we examine the blog post in our website fellow detectives, you'll notice this piece of text:
 
 > You’ll find this post in your `_posts` folder.
 
@@ -236,9 +243,9 @@ _posts/
 └── 2022-03-27-welcome-to-jekyll.markdown
 ```
 
-The post also helps us by telling us how to format our file name: `YEAR-MONTH-DAY-title.MARKUP` first, the file name needs a date on when it was written in the format `YEAR-MONTH-DAY`, next, the blog title, separated from the date with an dash: `-title` and last, the file extension: `.MARKUP`
+The post also helps us by telling us how to format our file name: `YEAR-MONTH-DAY-title.MARKUP` first, the file name needs a date on when it was written in the format `YEAR-MONTH-DAY`, next, the blog title, separated from the date with an dash: `-title` and last, the file extension: `.MARKUP`.
 
-(Take extra attention to the file name, if it's incorrectly named, the post may not show up in your site)
+(Take extra attention to the file name, if it's incorrectly named, the post may not show up in your site).
 
 With this knowledge, we're able to start posting in our blog!
 
@@ -256,7 +263,7 @@ With our new file now in the folder, let's edit it, and add some text needed to 
 
 #### The Front Matter
 
-In Jekyll, this is called the `Front Matter`, It contains information about our website, in that way, Jekyll can use this special information and display it on our website, for the example, the date that it was written, the title, or even tags/categories. The front matter also needs to be between a pair of three dashed lines `---`.
+In Jekyll, this is called the `Front Matter`, It contains information about our blog post, so Jekyll can use this special information and display it on our website, for the example, the date that it was written, the title, or even tags/categories. The front matter also needs to be between a pair of three dashed lines `---`.
 
 The front matter, is not actually written in markdown, it's written in a markup language called `YAML`.
 
@@ -273,7 +280,7 @@ categories: jekyll update
 
 So, let's add the front matter to our newly created file, let's edit the file and add the following lines:
 
-But also let's add an extra parameter, called `coolness`
+But also let's add an extra parameter, called `coolness` just as an example:
 
 ```yaml
 ---
@@ -289,9 +296,9 @@ Now that we added a front matter to our file, Jekyll will automatically detect t
 
 ![An image showing the new post appearing in the website's homepage!](/assets/jekyll-tutorial-1/jekyll-new-post.png)
 
-You may or not have noticed that the front matter also affects our url, based on the information we have put in:
+You may or not have noticed that the front matter also affects our URL, based on the information we have put in:
 
-![An image showing how the front matter affects our url](/assets/jekyll-tutorial-1/jekyll-front-matter-url.png)
+![An image showing how the front matter affects our URL](/assets/jekyll-tutorial-1/jekyll-front-matter-url.png)
 
 #### Making the rest of the post
 
@@ -357,14 +364,14 @@ jekyll_blog
        └── jekyll-new-project-showcase.png
 ```
 
-The way jekyll lets you link files is really simple, you just need to work all the way from the project folder, until where your image is, let me show you:
+The way Jekyll lets you link files is really simple, you just need to work all the way from the project folder, until where your image is, let me show you:
 
 If we want to link `cat.jpeg` and `jekyll-default-post.png` in markdown, all we need to do is this:
 
 ```markdown
 ![alt text](/assets/cat.jpeg)
 ![alt text](/assets/jekyll-tutorial-1/jekyll-default-post.png)
-(The first '/' represents our project folder)
+(The first '/' represents our project folder).
 ```
 
 Or in HTML:
@@ -392,11 +399,11 @@ _posts
     └── 1970-01-01-python-is-good.md
 ```
 
-And it would behave exactly the same
+And it would behave exactly the same.
 
 ## Tip: Working with drafts
 
-You may want to write a blog post in the `_posts` folder, but it's incomplete and you don't want to show up in your blog right away, not even being able to be accessed by url, for that, you can use drafts, simply, create in your project's folder a new folder called `_drafts` (make sure to type exactly like that, so Jekyll recognizes the folder)
+You may want to write a blog post in the `_posts` folder, but it's incomplete and you don't want to show up in your blog right away, not even being able to be accessed by URL, for that, you can use drafts, simply, create in your project's folder a new folder called `_drafts` (make sure to type exactly like that, so Jekyll recognizes the folder).
 
 Move your work inside there, and it won't show up in your blog anywhere. To let Jekyll show your drafts though, you'll need to stop the server, and re-run it with a slightly different command:
 
@@ -406,24 +413,23 @@ jekyll serve --drafts
 
 The `_drafts` folder works a bit different than the `_posts` folder though, you don't need to put a date in your title, just a normal title fits.
 
-In addition, [thanks for a youtube comment in this video for pointing that out,](https://www.youtube.com/watch?v=X8jXkW3k2Jg) if you just want to hide a post, while being in the `_posts` folder, you can put in the front matter
+In addition, [thanks for a youtube comment in this video for pointing that out,](https://www.youtube.com/watch?v=X8jXkW3k2Jg) if you just want to hide a post, while being in the `_posts` folder, you can put in the front matter.
 
 ```yaml
 published: false
 ```
 
-And it will hide it from your blog
-
+And it will hide it from your blog.
 
 ## Customizing our blog, and applying a theme and a plugin
 
-Now that we covered just enough to get you started blogging with jekyll, let's customize it and give it a finished look. Do note that you don't need to do exactly what I'm doing in this guide, you may want to pick a different theme, you probably will want a different title, description, etc, customize your blog as you wish.
+Now that we covered just enough to get you started blogging with Jekyll, let's customize it and give it a finished look. Do note that you don't need to do exactly what I'm doing in this guide, you may want to pick a different theme, you probably will want a different title, description, etc, customize your blog as you wish.
 
 ### Getting rid of the placeholders
 
-I said earlier that we would get rid of the placeholder text, like the title, the description and social media, Let's do it now, I'm going to grab `_config.yml`, go line by line, and do the following edits: (If you don't want to fill some parameters like email or social media, just delete the entry and Jekyll will not show it, even the title, though I would advise to fill at least the title and description)
+I said earlier that we would get rid of the placeholder text, like the title, the description and social media, Let's do it now, I'm going to grab `_config.yml`, go line by line, and do the following edits: (If you don't want to fill some parameters like email or social media, just delete the entry and Jekyll will not show it, even the title, though I would advise to fill at least the title and description).
 
-(Another note: When you make some kind of changes, like chaging `_config.yml`, you need to restart the server to see the effects)
+(Another note: When you make some kind of changes, like changing `_config.yml`, you need to restart the server to see the effects).
 
 I want my blog's name to be `snake_cases` And I want to add my gmail email in there:
 
@@ -441,7 +447,7 @@ description: >-
   art, and everything in-between!
 ```
 
-We don't need to touch on these now, but depending on how we host our blog in Github Pages, we might have to mofify `baseurl`.
+We don't need to touch on these now, but depending on how we host our blog in Github Pages, we might have to modify `baseurl`.
 
 ``` yaml
 baseurl: "" # the subpath of your site, e.g. /blog
@@ -477,11 +483,10 @@ mastodon:
    instance: example.com
 ```
 
-Since I use Github (for programming) and Instagram (to post my drawings), I will add both accounts here.
+Since I use Github, I will add my account here.
 
 ```yaml
 github_username:  helaxious
-instagram_username: helaxious
 ```
 
 Finally, we can put our plugins and our theme, although I'm not going to use a plugin, I'm going to show how to install a theme and a plugin in a later section.
@@ -497,9 +502,9 @@ plugins:
 Now that we edited `_config.yml` as the way we want, we can see that our website changed quite a bit, it kinda looks the same, but removing the placeholder text made it look much more finished and professional:
 
 ![An image showing our new homepage, but with all the placeholders changed](/assets/jekyll-tutorial-1/jekyll-modified-homepage.png)
-(Removed the default post since we don't need it anymore)
+(Removed the default post since we don't need it anymore).
 
-It seems that we squashed every placeholder in our blog, but there's actually one more place (and maybe another one if you're in the mood) to customize: the about page
+It seems that we squashed every placeholder in our blog, but there's actually one more place (and maybe another one if you're in the mood) to customize: The about page.
 
 Let's check the `about.markdown` file to see what's inside:
 
@@ -510,7 +515,7 @@ title: About
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
+This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/).
 
 You can find the source code for Minima at GitHub:
 [jekyll][jekyll-organization] /
@@ -524,9 +529,9 @@ You can find the source code for Jekyll at GitHub:
 [jekyll-organization]: https://github.com/jekyll
 ```
 
-First, you may have noticed some differences in the front matter compared to our blog posts, the `layout` is set to page, there's no `date`, there's still a `title`, but there's also a parameter we've never seen before, `permalink`, like the name suggests, is a way to set a specific url for your page, you can also do that for posts if you want. If you don't put an `permalink`, Jekyll will automatically set an url based on the file's path.
+First, you may have noticed some differences in the front matter compared to our blog posts, the `layout` is set to page, there's no `date`, there's still a `title`, but there's also a parameter we've never seen before, `permalink`, like the name suggests, is a way to set a specific URL for your page, you can also do that for posts if you want. If you don't put an `permalink`, Jekyll will automatically set an URL based on the file's path.
 
-So if you want to set a different title, or put a different url, just change the front matter. I'm going to replace everything (except the front matter) and include my own text:
+So if you want to set a different title, or put a different URL, just change the front matter. I'm going to replace everything (except the front matter) and include my own text:
 
 ```markdown
 ---
@@ -563,11 +568,11 @@ I'm going to just edit these paragraphs, to not make it look kinda generic:
 
 ### Applying a theme and installing a plugin (optional)
 
-Let's now show how to install a theme, and how to install a plugin, since plugins are easier to install, let's do that first
+Now detectives, let me show how to install a theme, and how to install a plugin, since plugins are easier to install, let's do that first.
 
 ### Installing a plugin
 
-Contrary to themes, you don't have multiple installation methods on plugins, and the plugin installation method is pretty easy, let's pick a simple plugin, `liquid_reading_time` does what it says on the tin, I can use a `liquid` function to add the reading time of an article, superfluous? I wouldn't say so.
+Contrary to themes, you don't have multiple installation methods on plugins, and the plugin installation method is pretty easy, let's pick a simple plugin as an example, `liquid_reading_time` does what it says on the tin, I can use a `liquid` function to add the reading time of an article, superfluous? I wouldn't say so.
 
 ̣Let's add this gem to the `Gemfile`:
 
@@ -595,25 +600,25 @@ But before we go search for a theme, let's discuss the three possible ways we ca
 
 1. Gem-based themes (Recommended):
 
-    This is the option I reccommend you to use, Gem-based themes are very easy to use and manage, and the installation is very simple, generally you do it like this:
+    This is the option I recommend you to use, Gem-based themes are very easy to use and manage, and the installation is very simple, generally you do it like this:
 
     ```markdown
     Add this line to your Jekyll site's Gemfile:
-    `gem "your_theme-here"`
+    `gem "your_theme_here"`
 
     And add this line to your Jekyll site's _config.yml:
-    `theme: your_theme-here`
+    `theme: your_theme_here`
 
     And then execute:
     `$ bundle`
 
     Or install it yourself as:
-    `$ gem install your_theme-here`
+    `$ gem install your_theme_here`
     ```
 
-    (This text was taken from the [jekyll-theme-yat repository](https://github.com/jeffreytse/jekyll-theme-yat), just changed the theme's name to a generic one)
+    (This text was taken from the [jekyll-theme-yat repository](https://github.com/jeffreytse/jekyll-theme-yat), just changed the theme's name to a generic one).
 
-    The only downside to Gem-based themes is that not every theme is Gem-based, generally, some themes are hosted on github *only*, for that, you'll need to use `jekyll-remote-theme`, which is another great alternative.
+    The only downside to Gem-based themes is that not every theme is Gem-based, generally, some themes are hosted on Github *only*, for that, you'll need to use `jekyll-remote-theme`, which is another great alternative.
 
 2. `jekyll-remote-theme`:
 
@@ -621,7 +626,7 @@ But before we go search for a theme, let's discuss the three possible ways we ca
 
     Before we use the plugin, we must first *install* the plugin, we can do the same gist we saw on the 'Installing a plugin', just replace the plugin's name with `jekyll-remote-theme`.
 
-    Now let's tell `jekyll-remote-theme` to use a remote_theme, go to `_config.yml`, comment the current theme (put a hastag at the start of the line):
+    Now let's tell `jekyll-remote-theme` to use a remote_theme, go to `_config.yml`, comment the current theme (put a hashtag at the start of the line):
 
     ```yaml
     # theme: some_theme
@@ -633,7 +638,7 @@ But before we go search for a theme, let's discuss the three possible ways we ca
     remote_theme: owner/repository
     ```
 
-    To know the `owner` and the `repository` name, we just need to look at the repository's url:
+    To know the `owner` and the `repository` name, we just need to look at the repository's URL:
 
     ```
     https://github.com/jekyll/minima
@@ -704,13 +709,13 @@ Running our website now should show us our great theme!
 
 ![An image showing our applied theme](/assets/jekyll-tutorial-1/new-theme-fixed-theme.png)
 
-Well, there's some other changes I should make, but I think I showed you all the essentials, you're now capable of creating a website in Jekyll, how to write a blog post in it, how to apply a theme and a plugin, all that it lefts now is *publishing*
+Well, there's some other changes I should make, but I think I showed you all the essentials, you're now capable of creating a website in Jekyll, how to write a blog post in it, how to apply a theme and a plugin, all that it lefts now is *publishing*.
 
 ## Hosting the blog with Github Pages
 
-We finally finished building our blog! It still has a lot of work we could do, I could fully costumize every element of my website. But at this stage, it's fully functional, and ready to host.
+We finally finished building our blog! It still has a lot of work we could do, I could fully customize every element of my website. But at this stage, it's fully functional, and ready to host.
 
-In my case, I prefer to host my blog now, and then style it later, but if you want, you may customize everything, until your blog is the way you want, and then host when it's done. Or maybe you're happy with a theme, and don't need any further customization.
+In my case, I prefer to style it now, and then host my blog later, but, for example, you may want to host it right now. Or maybe you're happy as the way it is, and don't need any further customization.
 
 We're going to also need the help of a tool called [jekyll-deploy-action](https://github.com/jeffreytse/jekyll-deploy-action) that will build and deploy our blog for us, the reason we're going to use it is because Github actually [only allows a set of plugins](https://pages.github.com/versions/) on Github Pages, `jekyll-deploy-action` helps us by overcoming that restriction. Don't worry, it's super easy to set up.
 
@@ -724,7 +729,7 @@ Let's create a Github repository, one fast way to do it, is to just go to [githu
 
 Let's now give it a name, we have two options here, either we give it a regular name, like 'blog', or we name it `your-username.github.io`, where we replace `your-username` with your github username, make sure that you type it correctly.
 
-The difference in those two options is in your blog's url, if you name your repository like `your-username.github.io`, your blog url will look like this:
+The difference in those two options is in your blog's URL, if you name your repository like `your-username.github.io`, your blog URL will look like this:
 
 ```
 https://your-username.github.io
@@ -738,7 +743,7 @@ https://your-username.github.io/blog
 
 If you want to do it that way, you will also need to set the `baseurl` variable inside `_config.yml` to the name of your repository in front of a slash, for example, if you give the name `cool-blog`, you need to put `baseurl: "/cool-blog"`.
 
-Keep in mind that modifying the baseurl may break a bit your website, so you'll need to have a different `_config.yml` in your Github repository, and another `_config.yml` in your local repository.
+Keep in mind that modifying the `baseurl` may break a bit your website, so you'll need to have a different `_config.yml` in your Github repository, and another `_config.yml` in your local repository.
 
 In my opinion, I prefer just giving it a regular name, as it makes it clear that this website is a blog, but feel free to choose whatever you want.
 
@@ -760,12 +765,12 @@ Now that we created a repository, we're ready to set up `jekyll-deploy-action`.
 
 ### Setting up `jekyll-deploy-action`
 
-Now let's set up, `jekyll-deploy-action`, don't be scared, it's really simple to do, let's first go to our project (remember to be in the root folder), and create a folder named `.github`, and inside `.github` make another folder called `workflows`, make sure to spell them *exactly* like that, now, inside the `workflows` folder, let's create a text file, something like `build-jekyll.yml`, make sure to end it with `.yml`.
+Now detectives, let's set up `jekyll-deploy-action`, let's first go to our project (remember to be in the root folder), and create a folder named `.github`, and inside `.github` make another folder called `workflows`, make sure to spell them *exactly* like that, now, inside the `workflows` folder, let's create a text file, something like `build-jekyll.yml`, make sure to end it with `.yml`.
 
-Now let's copy and paste some text, let's go to [jekyll-deploy-action's repository](https://github.com/jeffreytse/jekyll-deploy-action#-usage) and go to the `usage` section, there's a template file we can copy, click on the `copy` button, paste the contents insided your file, that's our configuration file!
+Now let's copy and paste some text, let's go to [jekyll-deploy-action's repository](https://github.com/jeffreytse/jekyll-deploy-action#-usage) and go to the `usage` section, there's a template file we can copy, click on the `copy` button, paste the contents inside your file, that's our configuration file!
 
-![An image showing the copy button from the script's readme](/assets/jekyll-tutorial-1/deploy-script-copy-paste.png)
-(Hover the text, and a button should show up)
+![An image showing the copy button from the script's README](/assets/jekyll-tutorial-1/deploy-script-copy-paste.png)
+(Hover the text, and a button should show up).
 
 Awesome! Let's paste that in our file, now let's edit the file:
 
@@ -776,16 +781,16 @@ on:
       - master  # Here source code branch is `master`, it could be other branch
 ```
 
-Since we created our repository in Github, the default branch is named `main` not `master`, let's change that:
+Since we created our repository in Github, the default branch is named `main`, not `master`, let's change that:
 
 ```yaml
 on:
   push:
     branches:
-      - master  # Here source code branch is `master`, it could be other branch
+      - main
 ```
 
-Here we see jekyll's baseurl, we simply just need to type whatever is the `baseurl` in `_config.yml`
+Here we see Jekyll's baseurl, we simply just need to type whatever is the `baseurl` in `_config.yml`
 
 ```yaml
 jekyll_baseurl: ''         # Default is according to _config.yml
@@ -803,7 +808,7 @@ And that's all we had to do to set it up!
 
 Now let's create a branch named `gh-pages` which by default, is the name of the branch that Github publishes from:
 
-Let's go to our repository, click on the `main` button, type `gh-pages`, and click `Create branch: gh-pages from 'main'`
+Let's go to our repository, click on the `main` button, type `gh-pages`, and click `Create branch: gh-pages from 'main'`.
 
 ![An image showing creating a new branch in our repository](/assets/jekyll-tutorial-1/repository-create-branch.png)
 
@@ -820,7 +825,7 @@ First, we are going to clone our Github repository, we need to grab a link for t
 Now let's get back to our terminal, outside our project folder, type `git clone your_url`, replacing `your_url` with the copied link, it's going to make a folder with our Github repository inside of it, it should show something like this, this means our cloning was a success:
 
 ```
-Cloning into 'snakes_cases'...
+Cloning into 'snake_cases'...
 remote: Enumerating objects: 5, done.
 remote: Counting objects: 100% (5/5), done.
 remote: Compressing objects: 100% (3/3), done.
@@ -830,18 +835,18 @@ Receiving objects: 100% (5/5), done.
 
 Now we're going to copy our project's contents over to our new folder, then we're going back to the terminal, go inside our project using `cd`, and tell `git` to add our projects contents, for that, we can use `git add .`, then tell git to apply those changes with `git commit -m "your_message_here"`, then we tell git to upload our changes to our Github repository using `git push`.
 
-(If you don't have git setup to use with github, you'll get an error when trying to `git push`. Follow [Github's tutorial on this](https://docs.github.com/en/authentication/connecting-to-github-with-ssh) to set git for Github.)
+(If you don't have git setup to use with github, you'll get an error when trying to `git push`. Follow [Github's tutorial on this](https://docs.github.com/en/authentication/connecting-to-github-with-ssh) to set git for Github).
 
 That's our series of commands we want to do when we update our blog:
 - `git add .`
 - `git commit -m "message"`
 - `git push`
 
-And just like that, we uploaded our project into our Github repository! Because we added `jekyll-deploy-action`, it detected new changes in the `main` branch (the one we uploaded to), built our website, and put in the `gh-pages `branch, that means that, if everything was done correctly, that means that our website is online!
+And just like that, we uploaded our project into our Github repository! Because we added `jekyll-deploy-action`, it detected new changes in the `main` branch (the one we uploaded to), built our website, and put in the `gh-pages `branch, that means that, if everything was done correctly, our website is online!
 
 ### Going to our website
 
-Let's then go to our awesome website! Our website link is as follows, first our Github username, followed by `.github.io`, and if we named our repository anything other than `github_username.github.io`, where `github_username` is your username, we need to follow the link with a slash and the repository name:
+Let's then go to our awesome website! Our website link is as follows, first our Github username, followed by `.github.io`, and if we named our repository anything other than `github_username.github.io`, where `github_username` is the username, we need to follow the link with a slash and the repository name:
 
 ```
 github_username.github.io/repository-name
@@ -849,11 +854,47 @@ github_username.github.io/repository-name
 
 In my case, my link would be `helaxious.github.io/snake_cases`. Let's go to our website!
 
+![An image showing our website hosted on Github Pages!](/assets/jekyll-tutorial-1/hosted-website-good-page.png)
 
-### Updating `_config.yml`
+Incredible!
 
+### Configuring `_config.yml`
 
-### How to publish our posts
+(If you have named your repository `your_github_username.github.io` you can skip this section, this section only applies if you picked a different name).
+
+It seems like everything is cool now, but if we try to go back to our local server, our website looks ugly now! What happened?
+
+Well, because the `baseurl` is set to our repository name, our blog can't access a lot of the files! What we are going to do?
+
+Well, we can modify the `_config.yml` in our *local* repository, but when we push those changes to our *Github* repository, it's going to modify the `_config.yml` there too!
+
+So we need a way to keep our local repository's `_config.yml` different from the `_config.yml` from our Github repository, is there a solution?
+
+There is! We can tell git to ignore any changes to our `_config.yml` let's pull a terminal and type the following:
+
+```
+git update-index --assume-unchanged "_config.yml"
+```
+
+Now let's open `_config.yml` and let's leave the `baseurl` variable blank:
+
+```yaml
+baseurl: ""
+```
+
+If we restart our server, when we open our blog, it should display as normal!
+
+### Publishing our changes to our website
+
+Now, when you're happy with a post, or maybe you want to change something in your website, and you want to update the blog. Then you will need to do just like I showed you in the [Uploading our project](#uploading-our-project) section, the series of commands we need to type to update the server is really simple, open a terminal, and type these commands in succession:
+
+- `git add .`
+- `git commit -m "your_message_here"`
+- `git push`
+
+You should get an message like this:
+
+## Conclusion
 
 <p style="text-align: center">
 CONGRATULATIONS!<br>
@@ -861,10 +902,23 @@ We made a cool blog together!<br>
 Enjoy your new blog.<br>
 </p>
 
+And just like that, fellow detectives, we covered basically **EVERYTHING** you need to create a Jekyll blog, manage it, and publish it, in this comprehensive guide, we learned together:
+
+- What Jekyll is, its features, and what is a static site.
+- How to create a Jekyll blog, and run it.
+- How to create a post, and what is the `Front Matter`.
+- How to work with images, how to organize our posts in folders, and work with drafts.
+- We learned to customize our blog at a basic level.
+- How to install themes and plugins.
+- How to host our blog in Github Pages.
+- How to publish our changes.
+
+Now, you're well equipped to create your blog, now go, and create amazing stuff!
+
 ## Sources
 
-Girafe Academy's series on Jekyll, invaluable help for me to write this post, and to make this very site: https://www.youtube.com/playlist?list=PLLAZ4kZ9dFpOPV5C5Ay0pHaa0RJFhcmcB
+Giraffe Academy's series on Jekyll, invaluable help for me to write this post, and to make this very site: <a href="https://www.youtube.com/playlist?list=PLLAZ4kZ9dFpOPV5C5Ay0pHaa0RJFhcmcB">https://www.youtube.com/playlist?list=PLLAZ4kZ9dFpOPV5C5Ay0pHaa0RJFhcmcB</a>
 
-Cloudfare's website's definition of a Static Site Generator: https://www.cloudflare.com/learning/performance/static-site-generator/
+Cloudfare's website's definition of a Static Site Generator: <a href="https://www.cloudflare.com/learning/performance/static-site-generator/">https://www.cloudflare.com/learning/performance/static-site-generator/</a>
 
-Gitlab's blog post about the differences of a dynamic and a static website: https://about.gitlab.com/blog/2016/06/03/ssg-overview-gitlab-pages-part-1-dynamic-x-static/
+Gitlab's blog post about the differences of a dynamic and a static website: <a href="https://about.gitlab.com/blog/2016/06/03/ssg-overview-gitlab-pages-part-1-dynamic-x-static/">https://about.gitlab.com/blog/2016/06/03/ssg-overview-gitlab-pages-part-1-dynamic-x-static/</a>
