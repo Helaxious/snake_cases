@@ -1,7 +1,6 @@
 ---
 layout: post
 title: "Case: How we made this blog using Jekyll (and Github Pages) [Part 1]"
-permalink: /making-of-snake-cases-1
 date: 2022-04-10
 length: "Long"
 ---
@@ -165,11 +164,11 @@ jekyll serve
 
 The command will spit you some information, and a link to open our glorious website, click on it, or just go to `localhost:4000` (or whatever link your website is set) on any browser, the website should look something like this:
 
-![An image showcasing a brand new Jekyll blog](/assets/jekyll-tutorial-1/jekyll-new-project-showcase.png)
+![Homepage of our new Jekyll blog]({% file_link jekyll-new-project-showcase.png %})
 
 We can see the styling that Jekyll applies on the homepage, along with some links, an about page, an RSS link, and some social media buttons, clicking on the article 'Welcome to Jekyll!' will lead you to this post:
 
-![Another image showcasing the default article on the brand new Jekyll blog](/assets/jekyll-tutorial-1/jekyll-default-post.png)
+![Another image showcasing the default article on the brand new Jekyll blog]({% file_link jekyll-default-post.png %})
 
 This page gives you a bit of an insight on how blog posts on Jekyll works.
 
@@ -294,11 +293,11 @@ coolness: "too cool to handle"
 
 Now that we added a front matter to our file, Jekyll will automatically detect this new file, and update our website to show this new post, if you reload our home page, you'll see that the post now shows up, with our title, date, and everything!
 
-![An image showing the new post appearing in the website's homepage!](/assets/jekyll-tutorial-1/jekyll-new-post.png)
+![An image showing the new post appearing in the website's homepage!]({% file_link jekyll-new-post.png %})
 
 You may or not have noticed that the front matter also affects our URL, based on the information we have put in:
 
-![An image showing how the front matter affects our URL](/assets/jekyll-tutorial-1/jekyll-front-matter-url.png)
+![An image showing how the front matter affects our URL]({% file_link jekyll-front-matter-url.png %})
 
 #### Making the rest of the post
 
@@ -321,65 +320,15 @@ coolness: "too cool to handle"
 
 And it should look something like this:
 
-![An image showing our updated blog post](/assets/jekyll-tutorial-1/jekyll-markdown-showcase.png)
+![An image showing our updated blog post]({% file_link jekyll-markdown-showcase.png %})
 
 In this post, we added a normal markdown heading, and also, to show the features of adding HTML, we also added a stylized HTML heading, and a button with some JS functionality, all of this in a single markdown file, *AWESOME* right?
 
 #### Working with images
 
-Working with image in Jekyll is also simple, let's first make a folder for our images, called `assets`, or any other name, just don't name it starting with an `_`, or Jekyll might confuse the folder with something else, place it at the root directory of your project, your project folder should be looking like this:
-
-```bash
-jekyll_blog/
-├── 404.html
-├── about.markdown
-├── assets  <--- Here it is
-├── _config.yml
-├── Gemfile
-├── Gemfile.lock
-├── index.markdown
-├── _posts
-└── _site
-```
-
-Let's create a folder for our blog post, but you're able to organize the way you see fit.
-
-```
-assets/
-└── jekyll-tutorial-1  <--- Name it the way you like
-```
-
-Let's put some images in it, for this example, let's use this very own post's images (as the time I'm writing it) as an example, and also a cat picture outside the `jekyll-tutorial-1` folder because, why not?:
-
-```
-jekyll_blog
-└── assets
-   ├── cat.jpeg
-   └── jekyll-tutorial-1
-       ├── jekyll-default-post.png
-       ├── jekyll-example-post.png
-       ├── jekyll-front-matter-url.png
-       ├── jekyll-markdown-showcase.png
-       ├── jekyll-new-post.png
-       └── jekyll-new-project-showcase.png
-```
-
-The way Jekyll lets you link files is really simple, you just need to work all the way from the project folder, until where your image is, let me show you:
-
-If we want to link `cat.jpeg` and `jekyll-default-post.png` in markdown, all we need to do is this:
-
-```markdown
-![alt text](/assets/cat.jpeg)
-![alt text](/assets/jekyll-tutorial-1/jekyll-default-post.png)
-(The first '/' represents our project folder).
-```
-
-Or in HTML:
-
-```html
-<img src="/assets/cat.jpeg">
-<img src="/assets/jekyll-tutorial-1/jekyll-default-post.png">
-```
+{% raw %}
+[I'm currently re-writting this section]
+{% endraw %}
 
 ### Organizing your posts
 
@@ -501,7 +450,7 @@ plugins:
 
 Now that we edited `_config.yml` as the way we want, we can see that our website changed quite a bit, it kinda looks the same, but removing the placeholder text made it look much more finished and professional:
 
-![An image showing our new homepage, but with all the placeholders changed](/assets/jekyll-tutorial-1/jekyll-modified-homepage.png)
+![An image showing our new homepage, but with all the placeholders changed]({% file_link jekyll-modified-homepage.png %})
 (Removed the default post since we don't need it anymore).
 
 It seems that we squashed every placeholder in our blog, but there's actually one more place (and maybe another one if you're in the mood) to customize: The about page.
@@ -669,7 +618,7 @@ Since hydeout is a Gem-Based theme, we can install it using the method I showed 
 
 Let's hop into our blog, and see if anything changed:
 
-![An image showing our new theme, but the homepage is just a blank page](/assets/jekyll-tutorial-1/new-theme-empty-blog.png)
+![An image showing our new theme, but the homepage is just a blank page]({% file_link new-theme-empty-blog.png %})
 
 ...As you can see, there's no content here, we need to do some adjustments. Obviously, if you're using a different theme, something different will happen. But showing the trouble-shooting process is still helpful.
 
@@ -707,7 +656,7 @@ plugins:
 
 Running our website now should show us our great theme!
 
-![An image showing our applied theme](/assets/jekyll-tutorial-1/new-theme-fixed-theme.png)
+![An image showing our applied theme]({% file_link new-theme-fixed-theme.png %})
 
 Well, there's some other changes I should make, but I think I showed you all the essentials, you're now capable of creating a website in Jekyll, how to write a blog post in it, how to apply a theme and a plugin, all that it lefts now is *publishing*.
 
@@ -725,7 +674,7 @@ Let's now do the last step to finish our case, host our blog in Github Pages!
 
 Let's create a Github repository, one fast way to do it, is to just go to [github.com/new](https://github.com/new), and it will prompt us to create a repository right away!
 
-![An image showing the creation of a Github repository](/assets/jekyll-tutorial-1/new-github-repository.png)
+![An image showing the creation of a Github repository]({% file_link new-github-repository.png %})
 
 Let's now give it a name, we have two options here, either we give it a regular name, like 'blog', or we name it `your-username.github.io`, where we replace `your-username` with your github username, make sure that you type it correctly.
 
@@ -749,17 +698,17 @@ In my opinion, I prefer just giving it a regular name, as it makes it clear that
 
 Now let's take a look at our repository again:
 
-![An image showing our repository, with the name and description filled](/assets/jekyll-tutorial-1/repository-name-description.png)
+![An image showing our repository, with the name and description filled]({% file_link repository-name-description.png %})
 
 I also filled the description, you can fill it with whatever you want, or keep it empty if you like. You can check to make your repository private if you want, just make sure to switch back to public when you want to publish it.
 
 Now let's scroll a bit, check `Add a README file` (it's a bit easier to work on a repository that isn't empty), and click `Create Repository`.
 
-![An image showing the end of the repository creation page](/assets/jekyll-tutorial-1/repository-extra-stuff.png)
+![An image showing the end of the repository creation page]({% file_link repository-extra-stuff.png %})
 
 That will takes us to our repository, isn't it beautiful? Let's remove the README file too, as we don't need that anymore.
 
-![An image showing the page of our new repository](/assets/jekyll-tutorial-1/github-new-repository.png)
+![An image showing the page of our new repository]({% file_link github-new-repository.png %})
 
 Now that we created a repository, we're ready to set up `jekyll-deploy-action`.
 
@@ -769,7 +718,7 @@ Now detectives, let's set up `jekyll-deploy-action`, let's first go to our proje
 
 Now let's copy and paste some text, let's go to [jekyll-deploy-action's repository](https://github.com/jeffreytse/jekyll-deploy-action#-usage) and go to the `usage` section, there's a template file we can copy, click on the `copy` button, paste the contents inside your file, that's our configuration file!
 
-![An image showing the copy button from the script's README](/assets/jekyll-tutorial-1/deploy-script-copy-paste.png)
+![An image showing the copy button from the script's README]({% file_link deploy-script-copy-paste.png %})
 (Hover the text, and a button should show up).
 
 Awesome! Let's paste that in our file, now let's edit the file:
@@ -810,17 +759,17 @@ Now let's create a branch named `gh-pages` which by default, is the name of the 
 
 Let's go to our repository, click on the `main` button, type `gh-pages`, and click `Create branch: gh-pages from 'main'`.
 
-![An image showing creating a new branch in our repository](/assets/jekyll-tutorial-1/repository-create-branch.png)
+![An image showing creating a new branch in our repository]({% file_link repository-create-branch.png %})
 
 Now we're on the `gh-pages` branch, let's go back to the `main` branch!
 
-![An image showing the branch dialog](/assets/jekyll-tutorial-1/repository-changing-branch.png)
+![An image showing the branch dialog]({% file_link repository-changing-branch.png %})
 
 ### Uploading our project
 
 First, we are going to clone our Github repository, we need to grab a link for this, let's go back to our repository, there's a big green button called `Code`, click on that, click on `HTTPS` or `SSH`, and click on the copy button, and that's it, that's our link!
 
-![An image showing the clone dialog of our repository](/assets/jekyll-tutorial-1/repository-remote-link.png)
+![An image showing the clone dialog of our repository]({% file_link repository-remote-link.png %})
 
 Now let's get back to our terminal, outside our project folder, type `git clone your_url`, replacing `your_url` with the copied link, it's going to make a folder with our Github repository inside of it, it should show something like this, this means our cloning was a success:
 
@@ -854,7 +803,7 @@ github_username.github.io/repository-name
 
 In my case, my link would be `helaxious.github.io/snake_cases`. Let's go to our website!
 
-![An image showing our website hosted on Github Pages!](/assets/jekyll-tutorial-1/hosted-website-good-page.png)
+![An image showing our website hosted on Github Pages!]({% file_link hosted-website-good-page.png %})
 
 Incredible!
 
