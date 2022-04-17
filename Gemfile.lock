@@ -54,6 +54,7 @@ GEM
       terminal-table (~> 2.0)
     jekyll-feed (0.16.0)
       jekyll (>= 3.7, < 5.0)
+    jekyll-file-link (0.1.0)
     jekyll-gist (1.5.0)
       octokit (~> 4.2)
     jekyll-paginate (1.1.0)
@@ -105,6 +106,7 @@ DEPENDENCIES
   http_parser.rb (~> 0.6.0)
   jekyll (~> 4.2.2)
   jekyll-feed (~> 0.12)
+  jekyll-file-link (~> 0.1.0)
   jekyll-theme-hydeout (~> 4.1)
   tzinfo (~> 1.2)
   tzinfo-data
