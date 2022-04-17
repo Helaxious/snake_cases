@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Case: How we made this blog using Jekyll (and Github Pages) [Part 1]"
-date: 2022-04-10
+date: 2022-04-17
 length: "Long"
 ---
 
