@@ -16,10 +16,10 @@ gem "jekyll-theme-hydeout", "~> 4.1"
 # gem "github-pages", group: :jekyll_plugins
 # If you have any plugins, put them here!
 
-gem "jekyll-file-link"
 gem "jekyll_awesome_parser"
 
 group :jekyll_plugins do
+  gem "jekyll-file-link"
   gem "jekyll-feed", "~> 0.12"
 end
 
