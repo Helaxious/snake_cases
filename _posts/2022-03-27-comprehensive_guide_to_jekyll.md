@@ -898,6 +898,8 @@ There is! We can tell git to ignore any changes to our `_config.yml` let's pull 
 git update-index --assume-unchanged "_config.yml"
 ```
 
+This may be not a perfect solution, but at least it helps the problem a bit.
+
 Now let's open `_config.yml` and let's leave the `baseurl` variable blank:
 
 ```yaml
