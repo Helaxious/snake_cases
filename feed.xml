@@ -1,0 +1,948 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="/snake_cases/feed.xml" rel="self" type="application/atom+xml" /><link href="/snake_cases/" rel="alternate" type="text/html" /><updated>2022-07-17T21:19:21+00:00</updated><id>/snake_cases/feed.xml</id><title type="html">snake_cases</title><subtitle>snake_cases is a programming blog that shares my adventures and findings about programming in general, you'll find cool stuff like games, websites, art, and everything in-between!</subtitle><entry><title type="html">A Comprehensive guide to Jekyll</title><link href="/snake_cases/2022/04/17/comprehensive_guide_to_jekyll.html" rel="alternate" type="text/html" title="A Comprehensive guide to Jekyll" /><published>2022-04-17T00:00:00+00:00</published><updated>2022-04-17T00:00:00+00:00</updated><id>/snake_cases/2022/04/17/comprehensive_guide_to_jekyll</id><content type="html" xml:base="/snake_cases/2022/04/17/comprehensive_guide_to_jekyll.html"><![CDATA[<p>Hello there, today, I’m going to show you how to make a Jekyll blog from scratch, and take you all the way through a fully realized blog, with a theme, and maybe some plugins installed, in other words, this is a comprehensive guide to Jekyll.</p>
+
+<p>Sounds fun? All right, let’s go.</p>
+
+<h2 id="table-of-contents">Table of contents:</h2>
+
+<ul>
+  <li><a href="#introduction">Introduction</a></li>
+  <li><a href="#cool-features-of-jekyll">Cool features of Jekyll</a></li>
+  <li><a href="#but-whats-a-static-site">But what’s a static site?</a></li>
+  <li><a href="#before-we-jump-in">Before we jump in</a></li>
+  <li><a href="#making-a-bare-bones-website">Making a bare-bones website</a>
+    <ul>
+      <li><a href="#creating-a-brand-new-project">Creating a brand new project</a></li>
+      <li><a href="#folder-structure">Folder structure</a></li>
+      <li><a href="#running-and-checking-our-website">Running and checking our website</a></li>
+    </ul>
+  </li>
+  <li><a href="#creating-posts">Creating posts</a>
+    <ul>
+      <li><a href="#how-to-create-a-post">How to create a post</a></li>
+      <li><a href="#making-a-post">Making a post</a>
+        <ul>
+          <li><a href="#the-front-matter">The Front Matter</a></li>
+          <li><a href="#making-the-rest-of-the-post">Making the rest of the post</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#organizing-your-posts">Organizing your posts</a></li>
+  <li><a href="#working-with-images">Working with images</a></li>
+  <li><a href="#tip-working-with-drafts">Tip: Working with drafts</a></li>
+  <li><a href="#customizing-our-blog-and-applying-a-theme-and-a-plugin">Customizing our blog, and applying a theme and a plugin</a>
+    <ul>
+      <li><a href="#getting-rid-of-the-placeholders">Getting rid of the placeholders</a></li>
+      <li><a href="#editing-our-blog-pages">Editing our blog pages</a></li>
+      <li><a href="#applying-a-theme-and-installing-a-plugin-optional">Applying a theme and installing a plugin (optional)</a></li>
+      <li><a href="#installing-a-plugin">Installing a plugin</a>
+        <ul>
+          <li><a href="#before-you-install-a-theme">Before you install a theme</a></li>
+          <li><a href="#installing-a-theme">Installing a theme</a></li>
+          <li><a href="#doing-some-adjustments">Doing some adjustments</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#hosting-the-blog-with-github-pages">Hosting the blog with Github Pages</a>
+    <ul>
+      <li><a href="#creating-an-empty-github-repository">Creating an empty Github Repository</a></li>
+      <li><a href="#setting-up-jekyll-deploy-action">Setting up <code class="language-plaintext highlighter-rouge">jekyll-deploy-action</code></a></li>
+      <li><a href="#creating-gh-pages-branch">Creating <code class="language-plaintext highlighter-rouge">gh-pages</code> branch</a></li>
+      <li><a href="#uploading-our-project">Uploading our project</a></li>
+      <li><a href="#going-to-our-website">Going to our website</a></li>
+      <li><a href="#configuring-_configyml">Configuring <code class="language-plaintext highlighter-rouge">_config.yml</code></a></li>
+      <li><a href="#publishing-our-changes-to-our-website">Publishing our changes to our website</a></li>
+    </ul>
+  </li>
+  <li><a href="#conclusion">Conclusion</a></li>
+  <li><a href="#sources">Sources</a></li>
+</ul>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>In this post, I will show how I built this blog using <code class="language-plaintext highlighter-rouge">Jekyll</code>, a simple to use static site generator (I’ll explain what’s that soon).</p>
+
+<p>And we’ll use <code class="language-plaintext highlighter-rouge">Github Pages</code>, A service provided by Github that allows you to host for free a static website with a <code class="language-plaintext highlighter-rouge">github.io</code> domain.</p>
+
+<p>I made this guide partially because I think resources on using Jekyll are a bit scarce, even though Jekyll is a great tool, it suffers from having little to no documentation, <a href="https://www.youtube.com/playlist?list=PLLAZ4kZ9dFpOPV5C5Ay0pHaa0RJFhcmcB">Giraffe Academy’s series is great.</a> But I don’t think it covers every corner you need about Jekyll.</p>
+
+<p>But anyways, let’s start the guide!</p>
+
+<h2 id="cool-features-of-jekyll">Cool features of Jekyll</h2>
+
+<ul>
+  <li>Jekyll’s strongest point is being <em>flexible</em> and <em>easy</em> to use.</li>
+  <li>Jekyll makes it very easy to make a blog with no code at all, but is also very flexible for more advanced customization.</li>
+  <li>All it needs to make a blog post is a markdown file, and you can even include <code class="language-plaintext highlighter-rouge">HTML</code>, <code class="language-plaintext highlighter-rouge">CSS</code>, and <code class="language-plaintext highlighter-rouge">JS</code>.</li>
+  <li>If you’re not in the mood for making your own web pages, you can also install user-created themes and plugins, it’s as easy as changing two lines.</li>
+  <li>Since Jekyll is a <em>static site</em> generator, that means you’re able to host it for <em>free</em> on Github Pages, actually Github itself <a href="https://www.youtube.com/watch?v=2MsN8gpT6jY"><em>recommends Jekyll</em></a> for their platform.</li>
+</ul>
+
+<h2 id="but-whats-a-static-site">But what’s a static site?</h2>
+
+<p>Basically, we have two different types of websites, <strong>static websites</strong> and <strong>dynamic websites</strong>, their difference is simply on that static websites doesn’t do anything besides serve the same web pages to all users, while dynamic websites can serve web pages with different content to the users, for example, display the user’s username at the top of the page.</p>
+
+<p>Like the name suggests, a static website is, well, static, everything is pre-baked, the website is going to display the same version of a page to everyone else.</p>
+
+<p>Not being able to do any of that fancy stuff sounds limiting, but you’re still able to make very functional websites like:</p>
+
+<ul>
+  <li>A documentation website</li>
+  <li>A blog website (like this one!)</li>
+  <li>Any website that only needs to serve plain web pages to the user (like a homepage for a software)</li>
+</ul>
+
+<p>And you have the added bonus that static websites, for not doing any extra work besides serving a web page for the user, you have the benefit of being <em>faster</em> and <em>secure</em>, and for a blog, this is the perfect solution.</p>
+
+<h2 id="before-we-jump-in">Before we jump in</h2>
+
+<p>Before we jump in, we need a few things installed:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Ruby</code> (An interpreted programming language)</li>
+  <li><code class="language-plaintext highlighter-rouge">Jekyll</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Bundler</code> (A ruby package that will install additional things for us)</li>
+</ul>
+
+<p>To install <code class="language-plaintext highlighter-rouge">Ruby</code>, <code class="language-plaintext highlighter-rouge">Jekyll</code> and <code class="language-plaintext highlighter-rouge">Bundler</code>, follow the instructions inside <a href="https://jekyllrb.com/docs/installation/">Jekyll’s website.</a></p>
+
+<p>And if you want to host your blog on Github Pages:</p>
+
+<ul>
+  <li>A <code class="language-plaintext highlighter-rouge">Github</code> account to host it on Github pages (obviously).</li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">git</code> installed, ready to use with Github. If you’re using git for the first time, you have to set the username and email, you’ll just need to pull a terminal (or git bash) and type this, replacing your username and your email with your Github username and Github email:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  git config <span class="nt">--global</span> user.name <span class="s2">"my_github_username"</span>
+  git config <span class="nt">--global</span> user.email <span class="s2">"my_github_email"</span>
+</code></pre></div>    </div>
+
+    <p>and you will also need to <a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh">set an ssh key for github.</a></p>
+  </li>
+</ul>
+
+<h2 id="making-a-bare-bones-website">Making a bare-bones website</h2>
+
+<h3 id="creating-a-brand-new-project">Creating a brand new project</h3>
+
+<p>Now that we installed everything we needed, we can finally create the website, it’s as simple as saying <code class="language-plaintext highlighter-rouge">jekyll new project</code>, because that’s the command we’re going to use to create the website folder.</p>
+
+<p>Pull a terminal (if you’re not used to a terminal, don’t fret, it’s not as scary as it looks) and type the following:</p>
+
+<p>(Substitute ‘name_of_your_project’ for the name you want to give the folder).</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jekyll new name_of_your_project
+</code></pre></div></div>
+
+<p>This creates a folder with our Jekyll project inside. Make sure to remember the name of your project, because we’re going to enter this folder right after.</p>
+
+<p>Now, to run the website, first we need to be on the project’s folder.</p>
+
+<p>To enter the folder, we’re going to use the <code class="language-plaintext highlighter-rouge">cd</code> command (<code class="language-plaintext highlighter-rouge">cd</code> command works on Linux/Windows/Mac).</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>name_of_your_project
+</code></pre></div></div>
+
+<h3 id="folder-structure">Folder structure</h3>
+
+<p>The inside of the project’s folder should be looking similar to this:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>example/
+├── 404.html
+├── about.markdown
+├── _config.yml
+├── Gemfile
+├── Gemfile.lock
+├── index.markdown
+├── _posts
+└── _site
+</code></pre></div></div>
+
+<p>Here are the most importants files you may want to know:</p>
+
+<ul>
+  <li>
+    <p>The <code class="language-plaintext highlighter-rouge">_site</code> folder basically contains the finished product of our blog, Since <code class="language-plaintext highlighter-rouge">_site</code> is the compiled blog, you won’t need to edit this folder.</p>
+  </li>
+  <li>
+    <p>The <code class="language-plaintext highlighter-rouge">_posts</code> folder stores all our blog posts, there’s a default showcase post inside.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">_config.yml</code> like the name suggests, contains the settings of our website, like name, description, plugins, themes, etc.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Gemfile</code> is a ruby file that basically stores the dependencies (other software that is required for our software to run) we need, like <code class="language-plaintext highlighter-rouge">Jekyll</code> or our blog’s default theme <code class="language-plaintext highlighter-rouge">minima</code>.</p>
+  </li>
+</ul>
+
+<h3 id="running-and-checking-our-website">Running and checking our website</h3>
+
+<p>To run our website, simply type this:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jekyll serve
+</code></pre></div></div>
+
+<p>The command will spit you some information, and a link to open our glorious website, click on it, or just go to <code class="language-plaintext highlighter-rouge">localhost:4000</code> (or whatever link your website is set) on any browser, the website should look something like this:</p>
+
+<p><img src="/snake_cases/assets/comprehensive_guide_to_jekyll/jekyll-new-project-showcase.png" alt="Homepage of our new Jekyll blog" /></p>
+
+<p>We can see the styling that Jekyll applies on the homepage, along with some links, an about page, an RSS link, and some social media buttons, clicking on the article ‘Welcome to Jekyll!’ will lead you to this post:</p>
+
+<p><img src="/snake_cases/assets/comprehensive_guide_to_jekyll/jekyll-default-post.png" alt="The default article on the brand new Jekyll blog" /></p>
+
+<p>This page gives you a bit of an insight on how blog posts on Jekyll works.</p>
+
+<p>Like a good detective sharp-eyed detective, we can also observe that the blog posts also have styling applied to them. There’s a nice big title, there’s a main bar showing the website’s name, you can also see in the article’s content some highlighted text.</p>
+
+<p>So far, the website looks good, although the theme looks kinda bland, it would be nice to replace the placeholder names with the name of the website, we’re gonna do that later.</p>
+
+<h2 id="creating-posts">Creating posts</h2>
+
+<h3 id="how-to-create-a-post">How to create a post</h3>
+
+<p>Now we’re going onto the meat and potatoes of Jekyll, how to create a post, and how to publish it.</p>
+
+<p>We’re going to use markdown to write our posts, but you can also just write a HTML file and it will work just fine.</p>
+
+<p>Markdown is an excellent tool, markdown is like an potato, it’s versatile, it’s simple to use, loved by many, and like I said, with Jekyll, you’re able to write HTML, CSS, <em>and even</em> JS, with Jekyll, here’s an example:</p>
+
+<style>
+    .button-square {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #blue-square {
+        margin-top: 0.1in;
+        margin-bottom: 0.1in;
+        width: 1in;
+        height: 1in;
+        background: hsl(200, 50%, 60%);
+    }
+</style>
+
+<script>
+    // Hello there
+    function buttonThingy() {
+        var r = Math.round(Math.random()*256);
+        var g = Math.round(Math.random()*256);
+        var b = Math.round(Math.random()*256);
+
+        var square = document.getElementById("blue-square");
+        square.style.background = `rgb(${r}, ${g}, ${b})`;
+    }
+</script>
+
+<div class="button-square">
+    <div id="blue-square"></div>
+
+<button onclick="buttonThingy()">Click me</button>
+</div>
+
+<p>Pretty wild right?</p>
+
+<p>Well, turns out, Jekyll also made posting on our blog super simple to do, if we examine the blog post in our website, you’ll notice this piece of text:</p>
+
+<blockquote>
+  <p>You’ll find this post in your <code class="language-plaintext highlighter-rouge">_posts</code> folder.</p>
+</blockquote>
+
+<p>..and this other piece of text!</p>
+
+<blockquote>
+  <p>Jekyll requires blog post files to be named according to the following format:</p>
+
+  <p><code class="language-plaintext highlighter-rouge">YEAR-MONTH-DAY-title.MARKUP</code></p>
+
+  <p>Where YEAR is a four-digit number, MONTH and DAY are both two-digit numbers, and MARKUP is the file extension representing the format used in the file. After that, include the necessary front matter.</p>
+</blockquote>
+
+<p>It tells us how we’re going to create a post, if you remember what I have said a while ago, all posts go into the <code class="language-plaintext highlighter-rouge">_posts</code> folder, in fact, we can go take a look and see that the default post is really there!</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>_posts/
+└── 2022-03-27-welcome-to-jekyll.markdown
+</code></pre></div></div>
+
+<p>The post also helps us by telling us how to format our file name: <code class="language-plaintext highlighter-rouge">YEAR-MONTH-DAY-title.MARKUP</code> first, the file name needs a date on when it was written in the format <code class="language-plaintext highlighter-rouge">YEAR-MONTH-DAY</code>, next, the blog title, separated from the date with an dash: <code class="language-plaintext highlighter-rouge">-title</code> and last, the file extension: <code class="language-plaintext highlighter-rouge">.MARKUP</code>.</p>
+
+<p>(Take extra attention to the file name, if it’s incorrectly named, the post may not show up in your site).</p>
+
+<p>With this knowledge, we’re able to start posting in our blog!</p>
+
+<h3 id="making-a-post">Making a post</h3>
+
+<p>Let’s create a markdown file for this named <code class="language-plaintext highlighter-rouge">1970-01-01-my-super-cool-title.md</code> inside the <code class="language-plaintext highlighter-rouge">_posts</code> folder, the <code class="language-plaintext highlighter-rouge">_posts</code> folder should look like this:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>_posts/
+├── 1970-01-01-my-super-cool-title.md
+└── 2022-03-27-welcome-to-jekyll.markdown
+</code></pre></div></div>
+
+<p>With our new file now in the folder, let’s edit it, and add some text needed to make it show on our website:</p>
+
+<h4 id="the-front-matter">The Front Matter</h4>
+
+<p>In Jekyll, this is called the <code class="language-plaintext highlighter-rouge">Front Matter</code>, It contains information about our blog post, so Jekyll can use this special information and display it on our website, for the example, the date that it was written, the title, or even tags/categories. The front matter also needs to be between a pair of three dashed lines <code class="language-plaintext highlighter-rouge">---</code>.</p>
+
+<p>The front matter is not actually written in markdown, it’s written in a markup language called <code class="language-plaintext highlighter-rouge">YAML</code>.</p>
+
+<p>You can add, remove, or even edit the information if you want, for example, if you change the title, Jekyll will update it with the new title. But you may not want to remove the layout parameter, as that tells Jekyll how this post is going to be stylized, if you remove it, the page is going to be really ugly.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">layout</span><span class="pi">:</span> <span class="s">post</span>
+<span class="na">title</span><span class="pi">:</span>  <span class="s2">"</span><span class="s">Welcome</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">Jekyll!"</span>
+<span class="na">date</span><span class="pi">:</span>   <span class="s">2022-03-27 19:35:59 -0300</span>
+<span class="na">categories</span><span class="pi">:</span> <span class="s">jekyll update</span>
+<span class="nn">---</span>
+</code></pre></div></div>
+
+<p>So, let’s add the front matter to our newly created file, let’s edit the file and add the following lines:</p>
+
+<p>But also let’s add an extra parameter, called <code class="language-plaintext highlighter-rouge">coolness</code> just as an example:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">layout</span><span class="pi">:</span> <span class="s">post</span>
+<span class="na">title</span><span class="pi">:</span>  <span class="s2">"</span><span class="s">My</span><span class="nv"> </span><span class="s">super</span><span class="nv"> </span><span class="s">cool</span><span class="nv"> </span><span class="s">title"</span>
+<span class="na">date</span><span class="pi">:</span>   <span class="s">1970-01-1 00:00:00 -0300</span>
+<span class="na">categories</span><span class="pi">:</span> <span class="s">jekyll cool-title</span>
+<span class="na">coolness</span><span class="pi">:</span> <span class="s2">"</span><span class="s">too</span><span class="nv"> </span><span class="s">cool"</span>
+<span class="nn">---</span>
+</code></pre></div></div>
+
+<p>Now that we added a front matter to our file, Jekyll will automatically detect this new file, and update our website to show this new post, if you reload our home page, you’ll see that the post now shows up, with our title, date, and everything!</p>
+
+<p><img src="/snake_cases/assets/comprehensive_guide_to_jekyll/jekyll-new-post.png" alt="The blog's homepage showing a new post" /></p>
+
+<p>As a side note, notice that the front matter also affects our URL, based on the information we have put in:</p>
+
+<p><img src="/snake_cases/assets/comprehensive_guide_to_jekyll/jekyll-front-matter-url.png" alt="An URL link" /></p>
+
+<p>Now, let’s finish our post.</p>
+
+<h4 id="making-the-rest-of-the-post">Making the rest of the post</h4>
+
+<p>Now let’s add some basic markdown, and just for fun, let’s add some HTML too.</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">layout</span><span class="pi">:</span> <span class="s">post</span>
+<span class="na">title</span><span class="pi">:</span>  <span class="s2">"</span><span class="s">My</span><span class="nv"> </span><span class="s">super</span><span class="nv"> </span><span class="s">cool</span><span class="nv"> </span><span class="s">title"</span>
+<span class="na">date</span><span class="pi">:</span>   <span class="s">1970-01-1 00:00:00 -0300</span>
+<span class="na">categories</span><span class="pi">:</span> <span class="s">jekyll cool-title</span>
+<span class="na">coolness</span><span class="pi">:</span> <span class="s2">"</span><span class="s">too</span><span class="nv"> </span><span class="s">cool</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">handle"</span>
+<span class="nn">---</span>
+
+<span class="gh"># Hi, i'm a heading</span>
+<span class="nt">&lt;h1</span> <span class="na">style=</span><span class="s">"color: blue;"</span><span class="nt">&gt;</span>Hey there, I'm a heading, but made out of HTML, and CSS!<span class="nt">&lt;/h1&gt;</span>
+
+<span class="nt">&lt;button</span> <span class="na">onclick=</span><span class="s">"alert(1)"</span><span class="nt">&gt;</span>I'm a button<span class="nt">&lt;/button&gt;</span>
+</code></pre></div></div>
+
+<p>And it should look something like this:</p>
+
+<p><img src="/snake_cases/assets/comprehensive_guide_to_jekyll/jekyll-markdown-showcase.png" alt="Our updated blog post" /></p>
+
+<p>In this post, we added a normal markdown heading, and also, to show the features of adding HTML, we also added a stylized HTML heading, and a button with some JS functionality, all of this in a single markdown file, awesome right?</p>
+
+<h3 id="organizing-your-posts">Organizing your posts</h3>
+
+<p>Here’s a quick tip on organizing posts, Jekyll actually lets you organize your posts in folders, as long as it’s inside the <code class="language-plaintext highlighter-rouge">_posts</code> folder, so you don’t have to work on one big folder with all your blog posts inside of it. So, for example, your <code class="language-plaintext highlighter-rouge">_posts</code> folder may look like this:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>_posts
+├── 1970-01-01-my-super-cool-title.md
+├── 2022-03-27-welcome-to-jekyll.markdown
+├── cooking <span class="o">(</span>folder<span class="o">)</span>
+│   └── 1970-01-01-cooking-food.md
+├── jekyll <span class="o">(</span>folder<span class="o">)</span>
+│   └── 1970-01-01-making-site-jekyll.md
+├── math-problems <span class="o">(</span>folder<span class="o">)</span>
+│   └── 1970-01-01-whats-2-plus-2.md
+└── python <span class="o">(</span>folder<span class="o">)</span>
+    └── 1970-01-01-python-is-good.md
+</code></pre></div></div>
+
+<p>And it would behave exactly the same.</p>
+
+<h3 id="working-with-images">Working with images</h3>
+
+<p>Working with images is pretty straight-foward in Jekyll, we can use the <code class="language-plaintext highlighter-rouge">link</code> tag, and work our way from  the project folder, till all the way to our image, for example:</p>
+
+<p>If my image is here:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jekyll-blog/
+  --/_posts
+  --/_site
+  --/assets
+    --/jekyll-tutorial-1
+      --/image.png &lt;-- Here!
+</code></pre></div></div>
+
+<p>We can link it like this:</p>
+
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{%</span><span class="w"> </span><span class="nt">link</span><span class="w"> </span>/assets/jekyll-tutorial-1/image.png<span class="w"> </span><span class="p">%}</span>
+</code></pre></div></div>
+
+<p>..But that can be quite repetitive and get pretty long as our project grows!</p>
+
+<p>If we want to group our posts and assets in categories, suddenly, we need to replace every image link we had so far!</p>
+
+<p>As far as I know, there are two plugins designed to help you with this kind of problem:</p>
+
+<ul>
+  <li>
+    <p><strong>jekyll-postfiles</strong> (Recommended):</p>
+
+    <p>This is the easiest to use, all that this plugin does is allow you to put your assets together with your posts in the <code class="language-plaintext highlighter-rouge">_posts</code> folder, for example, if you want a project structure like this:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  jekyll-blog/
+    --/_posts
+      --/my-super-cool-post
+        --/1970-01-01-my-super-cool-post.md &lt;-- Your post
+        --/my-cool-image.png
+        --/my-other-cool-image.png
+        --/my-cool-script.js
+</code></pre></div>    </div>
+
+    <p>That allows you to link your assets as easy as this:</p>
+
+    <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"my-other-cool-image.png"</span><span class="nt">&gt;</span>
+  !<span class="p">[](</span><span class="sx">my-cool-image.png</span><span class="p">)</span>
+</code></pre></div>    </div>
+
+    <p>Then I really recommend <code class="language-plaintext highlighter-rouge">jekyll-postfiles</code>. check the install instructions in the repo.</p>
+
+    <p><code class="language-plaintext highlighter-rouge">jekyll-postfiles</code>’s repo: <a href="https://github.com/nhoizey/jekyll-postfiles">https://github.com/nhoizey/jekyll-postfiles</a></p>
+  </li>
+  <li>
+    <p><strong>jekyll-file-link</strong>:</p>
+
+    <p>Ok, I just want to say right away that this is actually my plugin, I really liked <code class="language-plaintext highlighter-rouge">jekyll-postfiles</code>, but I don’t think it fits for my blog, as my blog is very image-heavy, I would like a separate folder for my assets.</p>
+
+    <p><code class="language-plaintext highlighter-rouge">jekyll-file-link</code> automatically searches for your post’s assets folder, but that requires a bit of a <em>strict</em> folder structure.</p>
+
+    <p>If you like your project to be structured like this:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  jekyll-blog/
+    --/posts
+      --/my-cool-post
+    --/assets
+      --/my-cool-post
+        --/my-cool-image.png
+        --/my-other-cool-image.png
+</code></pre></div>    </div>
+
+    <p>And still easily link your images like this:</p>
+
+    <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"{% file_link my-cool-image.png %}"</span><span class="nt">&gt;</span>
+  !<span class="p">[](</span><span class="sx">{%</span> file_link my-other-cool-image.png %})
+</code></pre></div>    </div>
+
+    <p>Then I reccommend <code class="language-plaintext highlighter-rouge">jekyll-file-link</code>. check the install instructions in the repo.</p>
+
+    <p><code class="language-plaintext highlighter-rouge">jekyll-file-link</code>’s repo: <a href="https://github.com/Helaxious/jekyll-file-link">https://github.com/Helaxious/jekyll-file-link</a></p>
+  </li>
+</ul>
+
+<p>But if your blog doesn’t use that many assets, and you rarely need to link a file, you probably don’t need to use these plugins.</p>
+
+<h3 id="tip-working-with-drafts">Tip: Working with drafts</h3>
+
+<p>You may want to write a blog post in the <code class="language-plaintext highlighter-rouge">_posts</code> folder, but it’s incomplete and you don’t want to show up in your blog right away, not even being able to be accessed by URL, for that, you can use drafts, simply, create in your project’s folder a new folder called <code class="language-plaintext highlighter-rouge">_drafts</code> (make sure to type exactly like that, so Jekyll recognizes the folder).</p>
+
+<p>Move your work inside there, and it won’t show up in your blog anywhere. To let Jekyll show your drafts though, you’ll need to stop the server, and re-run it with a slightly different command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jekyll serve <span class="nt">--drafts</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">_drafts</code> folder works a bit different than the <code class="language-plaintext highlighter-rouge">_posts</code> folder though, you don’t need to put a date in your title, just a normal title fits.</p>
+
+<p>In addition, <a href="https://www.youtube.com/watch?v=X8jXkW3k2Jg">thanks for a youtube comment in this video for pointing that out,</a> if you just want to hide a post, while being in the <code class="language-plaintext highlighter-rouge">_posts</code> folder, you can put in the front matter.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">published</span><span class="pi">:</span> <span class="no">false</span>
+</code></pre></div></div>
+
+<p>And it will hide it from your blog.</p>
+
+<h2 id="customizing-our-blog-and-applying-a-theme-and-a-plugin">Customizing our blog, and applying a theme and a plugin</h2>
+
+<p>Now that we covered just enough to get you started blogging with Jekyll, let’s customize it and give it a finished look.</p>
+
+<h3 id="getting-rid-of-the-placeholders">Getting rid of the placeholders</h3>
+
+<p>I said earlier that I would get rid of the placeholder text, like the title, the description and social media, Let’s do it now, I’m going to grab <code class="language-plaintext highlighter-rouge">_config.yml</code>, go line by line, and do the following edits: (If you don’t want to fill some parameters like email or social media, just delete the entry and Jekyll will not show it, even the title, though I would advise to fill at least the title and description).</p>
+
+<p>(Another note: When you make some kind of changes, like changing <code class="language-plaintext highlighter-rouge">_config.yml</code>, you need to restart the server to see the effects (press Control-C to stop <code class="language-plaintext highlighter-rouge">jekyll</code>, and type <code class="language-plaintext highlighter-rouge">jekyll serve</code> to start the server again)).</p>
+
+<p>I want my blog’s name to be <code class="language-plaintext highlighter-rouge">snake_cases</code> And I want to add my gmail email in there:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">title</span><span class="pi">:</span> <span class="s">snake_cases</span>
+<span class="na">email</span><span class="pi">:</span> <span class="s">helaxious@gmail.com</span>
+</code></pre></div></div>
+
+<p>Now let’s add a short description of my blog:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">description</span><span class="pi">:</span> <span class="pi">&gt;-</span>
+  <span class="s">snake_cases is a programming blog that shares my adventures and findings</span>
+  <span class="s">about programming in general, you'll find cool stuff like games, websites,</span>
+  <span class="s">art, and everything in-between!</span>
+</code></pre></div></div>
+
+<p>We don’t need to touch on these now, but depending on how we host our blog in Github Pages, we might have to modify <code class="language-plaintext highlighter-rouge">baseurl</code>.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">baseurl</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span> <span class="c1"># the subpath of your site, e.g. /blog</span>
+<span class="na">url</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span> <span class="c1"># the base hostname &amp; protocol for your site, e.g. http://example.com</span>
+</code></pre></div></div>
+
+<p>Now onto social media:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">twitter_username</span><span class="pi">:</span> <span class="s">jekyllrb</span>
+<span class="na">github_username</span><span class="pi">:</span>  <span class="s">jekyll</span>
+</code></pre></div></div>
+
+<p>Before I modify it, here’s a tip for you, if you want to include some other social media link, there’s actually a list of every social media link that <code class="language-plaintext highlighter-rouge">minima</code> (Jekyll’s default theme) supports in its README file, here’s the list (may not work in some themes):</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">twitter_username</span><span class="pi">:</span> <span class="s">jekyllrb</span>
+<span class="na">github_username</span><span class="pi">:</span>  <span class="s">jekyll</span>
+<span class="na">dribbble_username</span><span class="pi">:</span> <span class="s">jekyll</span>
+<span class="na">facebook_username</span><span class="pi">:</span> <span class="s">jekyll</span>
+<span class="na">flickr_username</span><span class="pi">:</span> <span class="s">jekyll</span>
+<span class="na">instagram_username</span><span class="pi">:</span> <span class="s">jekyll</span>
+<span class="na">linkedin_username</span><span class="pi">:</span> <span class="s">jekyll</span>
+<span class="na">pinterest_username</span><span class="pi">:</span> <span class="s">jekyll</span>
+<span class="na">youtube_username</span><span class="pi">:</span> <span class="s">jekyll</span>
+<span class="na">googleplus_username</span><span class="pi">:</span> <span class="s">+jekyll</span>
+<span class="na">rss</span><span class="pi">:</span> <span class="s">rss</span>
+
+<span class="na">mastodon</span><span class="pi">:</span>
+ <span class="pi">-</span> <span class="na">username</span><span class="pi">:</span> <span class="s">jekyll</span>
+   <span class="na">instance</span><span class="pi">:</span> <span class="s">example.com</span>
+ <span class="pi">-</span> <span class="na">username</span><span class="pi">:</span> <span class="s">jekyll2</span>
+   <span class="na">instance</span><span class="pi">:</span> <span class="s">example.com</span>
+</code></pre></div></div>
+
+<p>Since I use Github, I will add my account here. And delete the <code class="language-plaintext highlighter-rouge">twitter_username</code> variable</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">github_username</span><span class="pi">:</span>  <span class="s">helaxious</span>
+</code></pre></div></div>
+
+<p>Finally, we can put our plugins and our theme, although I’m not going to use a plugin, I’m going to show how to install a theme and a plugin in a later section.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">theme</span><span class="pi">:</span> <span class="s">minima</span>
+<span class="na">plugins</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">jekyll-feed</span>
+</code></pre></div></div>
+
+<h3 id="editing-our-blog-pages">Editing our blog pages</h3>
+
+<p>Now that I edited <code class="language-plaintext highlighter-rouge">_config.yml</code> as the way I want, we can see that our website changed quite a bit, it kinda looks the same, but removing the placeholder text made it look much more finished and professional:</p>
+
+<p><img src="/snake_cases/assets/comprehensive_guide_to_jekyll/jekyll-modified-homepage.png" alt="Our homepage, but with all the placeholders changed" /></p>
+
+<p>(Note: Removed the default post since we don’t need it anymore).</p>
+
+<p>It seems that we squashed every placeholder in our blog, but there’s actually one more place (and maybe another one if you’re in the mood) to customize: The about page.</p>
+
+<p>Let’s check the <code class="language-plaintext highlighter-rouge">about.markdown</code> file to see what’s inside:</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">layout</span><span class="pi">:</span> <span class="s">page</span>
+<span class="na">title</span><span class="pi">:</span> <span class="s">About</span>
+<span class="na">permalink</span><span class="pi">:</span> <span class="s">/about/</span>
+<span class="nn">---</span>
+
+This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at <span class="p">[</span><span class="nv">jekyllrb.com</span><span class="p">](</span><span class="sx">https://jekyllrb.com/</span><span class="p">)</span>.
+
+You can find the source code for Minima at GitHub:
+<span class="p">[</span><span class="nv">jekyll</span><span class="p">][</span><span class="ss">jekyll-organization</span><span class="p">]</span> /
+<span class="p">[</span><span class="nv">minima</span><span class="p">](</span><span class="sx">https://github.com/jekyll/minima</span><span class="p">)</span>
+
+You can find the source code for Jekyll at GitHub:
+<span class="p">[</span><span class="nv">jekyll</span><span class="p">][</span><span class="ss">jekyll-organization</span><span class="p">]</span> /
+<span class="p">[</span><span class="nv">jekyll</span><span class="p">](</span><span class="sx">https://github.com/jekyll/jekyll</span><span class="p">)</span><span class="sb">
+
+
+</span><span class="p">[</span><span class="ss">jekyll-organization</span><span class="p">]:</span> <span class="sx">https://github.com/jekyll</span>
+</code></pre></div></div>
+
+<p>First, you may have noticed some differences in the front matter compared to our blog posts, the <code class="language-plaintext highlighter-rouge">layout</code> is set to page, there’s no <code class="language-plaintext highlighter-rouge">date</code>, there’s still a <code class="language-plaintext highlighter-rouge">title</code>, but there’s also a parameter we’ve never seen before, <code class="language-plaintext highlighter-rouge">permalink</code>, like the name suggests, is a way to set a specific URL for your page, you can also do that for posts if you want. If you don’t put an <code class="language-plaintext highlighter-rouge">permalink</code>, Jekyll will automatically set an URL for you.</p>
+
+<p>So if you want to set a different title, or put a different URL, just change the front matter. I’m going to replace everything (except the front matter) and include my own text:</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">layout</span><span class="pi">:</span> <span class="s">page</span>
+<span class="na">title</span><span class="pi">:</span> <span class="s">About</span>
+<span class="na">permalink</span><span class="pi">:</span> <span class="s">/about/</span>
+<span class="nn">---</span>
+
+<span class="gu">## About snake_cases</span>
+
+Hey there, <span class="sb">`snake_cases`</span> is a personal programming blog where I share anything about programming that interests me, in other words, mostly about Python and videogames.
+</code></pre></div></div>
+
+<p>Now that we customized our about page, there’s one more page left, the <code class="language-plaintext highlighter-rouge">404.html</code>, if you don’t know HTML, or you just want to leave like that, that’s ok too.</p>
+
+<p>I’m going to just edit these paragraphs, to not make it look kinda generic:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h1&gt;</span>404<span class="nt">&lt;/h1&gt;</span>
+  <span class="nt">&lt;p&gt;&lt;strong&gt;</span>Page not found :(<span class="nt">&lt;/strong&gt;&lt;/p&gt;</span>
+  <span class="nt">&lt;p&gt;</span>The requested page could not be found.<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div></div>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;h1&gt;</span>404<span class="nt">&lt;/h1&gt;</span>
+    <span class="nt">&lt;p&gt;&lt;strong&gt;</span>Page not found :(<span class="nt">&lt;/strong&gt;&lt;/p&gt;</span>
+    <span class="nt">&lt;p&gt;</span>Sorry, the requested page could not be found. Perharps you mispelled the url?<span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;p&gt;</span>If you think that should not happen, let me know (send me an email).<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div></div>
+
+<h3 id="applying-a-theme-and-installing-a-plugin-optional">Applying a theme and installing a plugin (optional)</h3>
+
+<p>Now, I’m going to show how to install a theme, and how to install a plugin, since plugins are easier to install, let’s do that first.</p>
+
+<h3 id="installing-a-plugin">Installing a plugin</h3>
+
+<p>Contrary to themes, you don’t have multiple installation methods on plugins, and the plugin installation method is pretty easy, let’s pick a simple plugin as an example, <code class="language-plaintext highlighter-rouge">liquid_reading_time</code> does what it says on the tin, I can use a <code class="language-plaintext highlighter-rouge">liquid</code> function to add the reading time of an article, superfluous? I wouldn’t say so.</p>
+
+<p>̣Let’s add this gem to the <code class="language-plaintext highlighter-rouge">Gemfile</code>:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">gem</span> <span class="s2">"liquid_reading_time"</span>
+</code></pre></div></div>
+
+<p>…and let’s tell <code class="language-plaintext highlighter-rouge">_config.yml</code> to use it, make sure it’s in the <code class="language-plaintext highlighter-rouge">plugins</code> group:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">plugins</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">jekyll-feed</span>
+  <span class="pi">-</span> <span class="s">liquid_reading_time &lt;------ here</span>
+</code></pre></div></div>
+
+<p>Run <code class="language-plaintext highlighter-rouge">bundle</code> in our project, and it’s done!</p>
+
+<h4 id="before-you-install-a-theme">Before you install a theme</h4>
+
+<p>Now that we customized and branded a bit our website, we’re going to apply a theme to it. But do also note that you’re not limited to only themes, you may also make your website from scratch if you wish, or maybe modify an existing one.</p>
+
+<p>But before we go search for a theme, let’s discuss the three possible ways we can install a theme:</p>
+
+<ol>
+  <li>
+    <p>Gem-based themes (Recommended):</p>
+
+    <p>This is the option I recommend you to use, Gem-based themes are very easy to use and manage, and the installation is very simple:</p>
+
+    <p>Just like we did with the plugin, add the theme in the <code class="language-plaintext highlighter-rouge">Gemfile</code>:</p>
+
+    <div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">gem</span> <span class="s2">"your_theme_here"</span>
+</code></pre></div>    </div>
+
+    <p>Then let’s substitute the <code class="language-plaintext highlighter-rouge">theme</code> variable in the <code class="language-plaintext highlighter-rouge">_config.yml</code>:</p>
+
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="na">theme</span><span class="pi">:</span> <span class="s2">"</span><span class="s">your_theme_here"</span>
+</code></pre></div>    </div>
+
+    <p>The only downside to Gem-based themes is that not every theme is Gem-based, generally, some themes are hosted on Github <em>only</em>, for that, you’ll need to use <code class="language-plaintext highlighter-rouge">jekyll-remote-theme</code>, which is another great alternative.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">jekyll-remote-theme</code>:</p>
+
+    <p><code class="language-plaintext highlighter-rouge">jekyll-remote-theme</code> is a plugin that allows us to use basically <em>any</em> theme that is hosted on Github, you can use it locally and on Github Pages too, the only downside is that if you’re editing your Jekyll website locally, you need to <em>always</em> be online to make it work, the way you use it is as follows:</p>
+
+    <p>Before we use the plugin, we must first <em>install</em> the plugin, we can do the same gist we saw on the ‘Installing a plugin’, just replace the plugin’s name with <code class="language-plaintext highlighter-rouge">jekyll-remote-theme</code>.</p>
+
+    <p>Now let’s tell <code class="language-plaintext highlighter-rouge">jekyll-remote-theme</code> to use a remote_theme, go to <code class="language-plaintext highlighter-rouge">_config.yml</code>, comment the current theme (put a hashtag at the start of the line):</p>
+
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1"># theme: some_theme</span>
+</code></pre></div>    </div>
+
+    <p>And right below it, let’s put our <code class="language-plaintext highlighter-rouge">remote_theme</code> (make sure to use an underscore <code class="language-plaintext highlighter-rouge">_</code> and not a dash <code class="language-plaintext highlighter-rouge">-</code>), also make sure the theme’s name is formatted like this:</p>
+
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="na">remote_theme</span><span class="pi">:</span> <span class="s">owner/repository</span>
+</code></pre></div>    </div>
+
+    <p>To know the <code class="language-plaintext highlighter-rouge">owner</code> and the <code class="language-plaintext highlighter-rouge">repository</code> name, we just need to look at the repository’s URL:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> https://github.com/jekyll/minima
+                     ^        ^
+                   owner    repository
+</code></pre></div>    </div>
+
+    <p>Now let’s add it, it should look something like this:</p>
+
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1"># theme: some_theme</span>
+ <span class="na">remote_theme</span><span class="pi">:</span> <span class="s">jekyll/minima</span>
+</code></pre></div>    </div>
+
+    <p>And that’s it! To switch themes, all we need to do is to replace the remote_theme variable!</p>
+  </li>
+  <li>
+    <p>Just cloning/copy-pasting the theme:</p>
+
+    <p>This is a good option if you want to tinker with a theme, maybe you want to modify it with your own improvements, or just see how it works. Although that’s probably not what you want.</p>
+  </li>
+</ol>
+
+<h4 id="installing-a-theme">Installing a theme</h4>
+
+<p>Let’s now hunt for a theme, in my opinion the best place to find themes is <a href="https://rubygems.org/search?query=jekyll-theme">searching <code class="language-plaintext highlighter-rouge">jekyll-theme</code> in ruby-gems.org</a>, you can try it yourself, scrolling until some theme grabs your attention.</p>
+
+<p><a href="https://rubygems.org/gems/jekyll-theme-hydeout">This theme in particular</a> grabbed my attention, it seems to fit well to the detective vibe that I want my blog to have, if we <a href="https://github.com/fongandrew/hydeout">click on the gem’s homepage</a>, we are taken to its Github repository, here we can read the README.</p>
+
+<p>Since hydeout is a Gem-Based theme, we can install it using the method I showed you earlier, just replace the theme’s name with <code class="language-plaintext highlighter-rouge">jekyll-theme-hydeout</code>.</p>
+
+<p>Let’s hop into our blog, and see if anything changed:</p>
+
+<p><img src="/snake_cases/assets/comprehensive_guide_to_jekyll/new-theme-empty-blog.png" alt="Blank page" /></p>
+
+<p>…As you can see, there’s no content here, we need to do some adjustments. Obviously, if you’re using a different theme, something different will happen. But showing the trouble-shooting process is still helpful.</p>
+
+<h4 id="doing-some-adjustments">Doing some adjustments</h4>
+
+<p>Well, it’s an empty page, generally, when we use a new theme, there’s usually some tiny adjustments we need to do, for that, we should check the theme’s README, in my case, if we check hydeout’s README, we can see the following:</p>
+
+<blockquote>
+  <p>Hydeout uses pagination, so if you have an <code class="language-plaintext highlighter-rouge">index.md</code>, you’ll need to swap it with an <code class="language-plaintext highlighter-rouge">index.html</code> that uses the <code class="language-plaintext highlighter-rouge">index</code> layout:</p>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---
+layout: index
+title: Home
+---
+</code></pre></div>  </div>
+  <p>You’ll also need to add a setting to <code class="language-plaintext highlighter-rouge">_config.yml</code> telling Jekyll how many posts to include per page (e.g. <code class="language-plaintext highlighter-rouge">paginate: 5</code>).</p>
+</blockquote>
+
+<p>Doing a quick check in my project’s file structure, our index page is indeed a <code class="language-plaintext highlighter-rouge">markdown</code> file, let’s delete it, and make a new file named <code class="language-plaintext highlighter-rouge">index.html</code> and fill it with this:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">layout</span><span class="pi">:</span> <span class="s">index</span>
+<span class="na">title</span><span class="pi">:</span> <span class="s">Home</span>
+<span class="nn">---</span>
+</code></pre></div></div>
+
+<p>Now let’s go to <code class="language-plaintext highlighter-rouge">_config.yml</code> and add the <code class="language-plaintext highlighter-rouge">paginate</code> variable, let’s put it below the <code class="language-plaintext highlighter-rouge">theme</code> variable:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Build settings</span>
+<span class="na">theme</span><span class="pi">:</span> <span class="s">jekyll-theme-hydeout</span>
+<span class="na">paginate</span><span class="pi">:</span> <span class="m">5</span>
+<span class="na">plugins</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">jekyll-feed</span>
+</code></pre></div></div>
+
+<p>Running our website now should show us our great theme!</p>
+
+<p><img src="/snake_cases/assets/comprehensive_guide_to_jekyll/new-theme-fixed-theme.png" alt="Our blog with an applied theme" /></p>
+
+<p>Well, there’s some other changes I should make, but I think I showed you all the essentials, you’re now capable of creating a website in Jekyll, how to write a blog post in it, how to apply a theme and a plugin, all that it lefts now is <em>publishing</em>.</p>
+
+<h2 id="hosting-the-blog-with-github-pages">Hosting the blog with Github Pages</h2>
+
+<p>We finally finished building our blog! It still has a lot of work we could do, I could fully customize every element of my website. But at this stage, it’s fully functional, and ready to host.</p>
+
+<p>We’re going to also need the help of a tool called <a href="https://github.com/jeffreytse/jekyll-deploy-action">jekyll-deploy-action</a> that will build and deploy our blog for us, the reason we’re going to use it is because Github actually <a href="https://pages.github.com/versions/">only allows a set of plugins</a> on Github Pages, <code class="language-plaintext highlighter-rouge">jekyll-deploy-action</code> helps us by overcoming that restriction. Don’t worry about the details, it’s super easy to set up.</p>
+
+<p>Let’s now do the last step to finish our case, host our blog in Github Pages!</p>
+
+<h3 id="creating-an-empty-github-repository">Creating an empty Github Repository</h3>
+
+<p>Let’s create a Github repository, one fast way to do it, is to just go to <a href="https://github.com/new">github.com/new</a>, and it will prompt us to create a repository right away!</p>
+
+<p><img src="/snake_cases/assets/comprehensive_guide_to_jekyll/new-github-repository.png" alt="Page showing the creation of a Github repository" /></p>
+
+<p>Let’s now give it a name, we have two options here, either we give it a regular name, like ‘blog’, or we name it <code class="language-plaintext highlighter-rouge">your-username.github.io</code>, where we replace <code class="language-plaintext highlighter-rouge">your-username</code> with your github username, make sure that you type it correctly.</p>
+
+<p>The difference in those two options is in your blog’s URL, if you name your repository like <code class="language-plaintext highlighter-rouge">your-username.github.io</code>, your blog URL will look like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://your-username.github.io
+</code></pre></div></div>
+
+<p>If you give a regular name, like, for example, blog, it will look like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://your-username.github.io/blog
+</code></pre></div></div>
+
+<p>If you want to do it that way, you will also need to set the <code class="language-plaintext highlighter-rouge">baseurl</code> variable inside <code class="language-plaintext highlighter-rouge">_config.yml</code> to the name of your repository in front of a slash, for example, if you give the name <code class="language-plaintext highlighter-rouge">cool-blog</code>, you need to put <code class="language-plaintext highlighter-rouge">baseurl: "/cool-blog"</code>.</p>
+
+<p>Keep in mind that modifying the <code class="language-plaintext highlighter-rouge">baseurl</code> may break a bit your website, so you’ll need to have a different <code class="language-plaintext highlighter-rouge">_config.yml</code> in your Github repository, and another <code class="language-plaintext highlighter-rouge">_config.yml</code> in your local repository, I’m going to show how to do that later, so don’t worry about it.</p>
+
+<p>But anyways, in my opinion, I prefer just giving it a regular name instead of my username, as it makes it clear that this website is a blog, but feel free to choose whatever you want.</p>
+
+<p>Now let’s take a look at our repository again:</p>
+
+<p><img src="/snake_cases/assets/comprehensive_guide_to_jekyll/repository-name-description.png" alt="Repository creation page, with the name and description filled" /></p>
+
+<p>I also filled the description, you can fill it with whatever you want, or keep it empty if you like. You can check to make your repository private if you want, just make sure to switch back to public when you want to publish it.</p>
+
+<p>Now let’s scroll a bit, check <code class="language-plaintext highlighter-rouge">Add a README file</code> (it’s a bit easier to work on a repository that isn’t empty), and click <code class="language-plaintext highlighter-rouge">Create Repository</code>.</p>
+
+<p><img src="/snake_cases/assets/comprehensive_guide_to_jekyll/repository-extra-stuff.png" alt="End of the repository creation page" /></p>
+
+<p>That will takes us to our repository, isn’t it beautiful? Let’s remove the README file too, as we don’t need that anymore.</p>
+
+<p><img src="/snake_cases/assets/comprehensive_guide_to_jekyll/github-new-repository.png" alt="Page of our new repository" /></p>
+
+<p>Now that we created a repository, we’re ready to set up <code class="language-plaintext highlighter-rouge">jekyll-deploy-action</code>.</p>
+
+<h3 id="setting-up-jekyll-deploy-action">Setting up <code class="language-plaintext highlighter-rouge">jekyll-deploy-action</code></h3>
+
+<p>Now, let’s set up <code class="language-plaintext highlighter-rouge">jekyll-deploy-action</code>, let’s first go to our project (remember to be in the root folder), and create a folder named <code class="language-plaintext highlighter-rouge">.github</code>, and inside <code class="language-plaintext highlighter-rouge">.github</code> make another folder called <code class="language-plaintext highlighter-rouge">workflows</code>, make sure to spell them <em>exactly</em> like that, now, inside the <code class="language-plaintext highlighter-rouge">workflows</code> folder, let’s create a text file, something like <code class="language-plaintext highlighter-rouge">build-jekyll.yml</code>, make sure to end it with <code class="language-plaintext highlighter-rouge">.yml</code>.</p>
+
+<p>Now let’s copy and paste some text, let’s go to <a href="https://github.com/jeffreytse/jekyll-deploy-action#-usage">jekyll-deploy-action’s repository</a> and go to the <code class="language-plaintext highlighter-rouge">usage</code> section, there’s a template file we can copy, click on the <code class="language-plaintext highlighter-rouge">copy</code> button, paste the contents inside your file, that’s our configuration file!</p>
+
+<p><img src="/snake_cases/assets/comprehensive_guide_to_jekyll/deploy-script-copy-paste.png" alt="Cursor hovering a copy button" />
+(Hover the text, and a button should show up).</p>
+
+<p>Awesome! Let’s paste that in our file, now let’s edit the file:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">on</span><span class="pi">:</span>
+  <span class="na">push</span><span class="pi">:</span>
+    <span class="na">branches</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">master</span>  <span class="c1"># Here source code branch is `master`, it could be other branch</span>
+</code></pre></div></div>
+
+<p>Since we created our repository in Github, the default branch is named <code class="language-plaintext highlighter-rouge">main</code>, not <code class="language-plaintext highlighter-rouge">master</code>, let’s change that:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">on</span><span class="pi">:</span>
+  <span class="na">push</span><span class="pi">:</span>
+    <span class="na">branches</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">main</span>
+</code></pre></div></div>
+
+<p>Here we see Jekyll’s baseurl, we simply just need to type whatever is the <code class="language-plaintext highlighter-rouge">baseurl</code> in <code class="language-plaintext highlighter-rouge">_config.yml</code></p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">jekyll_baseurl</span><span class="pi">:</span> <span class="s1">'</span><span class="s">'</span>         <span class="c1"># Default is according to _config.yml</span>
+</code></pre></div></div>
+
+<p>In my case, the baseurl is <code class="language-plaintext highlighter-rouge">/snake_cases</code>, let’s put that then:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">jekyll_baseurl</span><span class="pi">:</span> <span class="s1">'</span><span class="s">/snake_cases'</span>
+</code></pre></div></div>
+
+<p>And that’s all we had to do to set it up!</p>
+
+<h3 id="creating-gh-pages-branch">Creating <code class="language-plaintext highlighter-rouge">gh-pages</code> branch</h3>
+
+<p>Now let’s create a branch named <code class="language-plaintext highlighter-rouge">gh-pages</code> which by default, is the name of the branch that Github publishes from, this is where our published site will go, but the normal jekyll files should be in the <code class="language-plaintext highlighter-rouge">main</code> branch:</p>
+
+<p>Let’s go to our repository, click on the <code class="language-plaintext highlighter-rouge">main</code> button, type <code class="language-plaintext highlighter-rouge">gh-pages</code>, and click <code class="language-plaintext highlighter-rouge">Create branch: gh-pages from 'main'</code>.</p>
+
+<p><img src="/snake_cases/assets/comprehensive_guide_to_jekyll/repository-create-branch.png" alt="Dialog box of our branches" /></p>
+
+<p>Now we’re on the <code class="language-plaintext highlighter-rouge">gh-pages</code> branch, let’s go back to the <code class="language-plaintext highlighter-rouge">main</code> branch!</p>
+
+<p><img src="/snake_cases/assets/comprehensive_guide_to_jekyll/repository-changing-branch.png" alt="Cursor hovering 'main' in the branches dialog box" /></p>
+
+<h3 id="uploading-our-project">Uploading our project</h3>
+
+<p>First, we are going to clone our Github repository, we need to grab a link for this, let’s go back to our repository, there’s a big green button called <code class="language-plaintext highlighter-rouge">Code</code>, click on that, click on <code class="language-plaintext highlighter-rouge">HTTPS</code> or <code class="language-plaintext highlighter-rouge">SSH</code>, and click on the copy button, and that’s it, that’s our link!</p>
+
+<p><img src="/snake_cases/assets/comprehensive_guide_to_jekyll/repository-remote-link.png" alt="Dialog box of cloning our repository" /></p>
+
+<p>Now let’s get back to our terminal, outside our project folder, type <code class="language-plaintext highlighter-rouge">git clone your_url</code>, replacing <code class="language-plaintext highlighter-rouge">your_url</code> with the copied link, it’s going to make a folder with our Github repository inside of it, it should show something like this, this means our cloning was a success:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Cloning into 'snake_cases'...
+remote: Enumerating objects: 5, done.
+remote: Counting objects: 100% (5/5), done.
+remote: Compressing objects: 100% (3/3), done.
+remote: Total 5 (delta 0), reused 0 (delta 0), pack-reused 0
+Receiving objects: 100% (5/5), done.
+</code></pre></div></div>
+
+<p>Now we’re going to copy our project’s contents over to our new folder, then we’re going back to the terminal, go inside our project using <code class="language-plaintext highlighter-rouge">cd</code>, and tell <code class="language-plaintext highlighter-rouge">git</code> to add our projects contents, for that, we can use <code class="language-plaintext highlighter-rouge">git add .</code>, then tell git to apply those changes with <code class="language-plaintext highlighter-rouge">git commit -m "your_message_here"</code>, then we tell git to upload our changes to our Github repository using <code class="language-plaintext highlighter-rouge">git push</code>.</p>
+
+<p>(If you don’t have git setup to use with github, you’ll get an error when trying to <code class="language-plaintext highlighter-rouge">git push</code>. Follow <a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh">Github’s tutorial on this</a> to set git for Github).</p>
+
+<p>That’s our series of commands we want to do whenever we update our blog, so make sure to memorize them:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">git add .</code></li>
+  <li><code class="language-plaintext highlighter-rouge">git commit -m "message"</code></li>
+  <li><code class="language-plaintext highlighter-rouge">git push</code></li>
+</ul>
+
+<p>And just like that, we uploaded our project into our Github repository! Now, because we added <code class="language-plaintext highlighter-rouge">jekyll-deploy-action</code>, it detected new changes in the <code class="language-plaintext highlighter-rouge">main</code> branch (the one we uploaded to), built our website, and put in the <code class="language-plaintext highlighter-rouge">gh-pages </code>branch, that means that, if everything was done correctly, our website is online!</p>
+
+<h3 id="going-to-our-website">Going to our website</h3>
+
+<p>Let’s then go to our awesome website! Our website link is as follows, first our Github username, followed by <code class="language-plaintext highlighter-rouge">.github.io</code>, and if we named our repository anything other than <code class="language-plaintext highlighter-rouge">github_username.github.io</code>, where <code class="language-plaintext highlighter-rouge">github_username</code> is the username, and if we gave an regular name to our repository, follow it with a slash and the repository name:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>github_username.github.io/repository-name
+</code></pre></div></div>
+
+<p>In my case, my link would be <code class="language-plaintext highlighter-rouge">helaxious.github.io/snake_cases</code>. Let’s go to our website!</p>
+
+<p><img src="/snake_cases/assets/comprehensive_guide_to_jekyll/hosted-website-good-page.png" alt="Our website hosted on Github Pages" /></p>
+
+<p>Incredible!</p>
+
+<h3 id="configuring-_configyml">Configuring <code class="language-plaintext highlighter-rouge">_config.yml</code></h3>
+
+<p>(If you have named your repository <code class="language-plaintext highlighter-rouge">your_github_username.github.io</code> you can skip this section, this section only applies if you picked a different name).</p>
+
+<p>It seems like everything is cool now, but if we try to go back to our local server, our website looks ugly now! What happened?</p>
+
+<p>Well, because the <code class="language-plaintext highlighter-rouge">baseurl</code> is set to our repository name, our blog can’t access a bunch of files! What we are going to do?</p>
+
+<p>Well, we can modify the <code class="language-plaintext highlighter-rouge">_config.yml</code> in our <em>local</em> repository, but when we push those changes to our <em>Github</em> repository, it’s going to modify the <code class="language-plaintext highlighter-rouge">_config.yml</code> there too!</p>
+
+<p>So we need a way to keep our local repository’s <code class="language-plaintext highlighter-rouge">_config.yml</code> different from the <code class="language-plaintext highlighter-rouge">_config.yml</code> from our Github repository, is there a solution?</p>
+
+<p>There is! We can tell git to ignore any changes to our <code class="language-plaintext highlighter-rouge">_config.yml</code> let’s pull a terminal and type the following:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git update-index --assume-unchanged "_config.yml"
+</code></pre></div></div>
+
+<p>This may be not a perfect solution, but at least it helps the problem a bit.</p>
+
+<p>Now let’s open <code class="language-plaintext highlighter-rouge">_config.yml</code> and let’s leave the <code class="language-plaintext highlighter-rouge">baseurl</code> variable blank:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">baseurl</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span>
+</code></pre></div></div>
+
+<p>If we restart our server, when we open our blog, it should display as normal!</p>
+
+<p>But do note, that if you want to update your <code class="language-plaintext highlighter-rouge">_config.yml</code> in the Github repository you’ll have to do that manually (if you view the <code class="language-plaintext highlighter-rouge">config.yml</code> file on Github on a browser, there should be an option to edit the file).</p>
+
+<h3 id="publishing-our-changes-to-our-website">Publishing our changes to our website</h3>
+
+<p>Now, when you’re happy with a post, or maybe you want to change something in your website, and you want to update the blog. Then you will need to do just like I showed you in the <a href="#uploading-our-project">Uploading our project</a> section, the series of commands we need to type to update the server is really simple, open a terminal, and type these commands in succession:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">git add .</code></li>
+  <li><code class="language-plaintext highlighter-rouge">git commit -m "your_message_here"</code></li>
+  <li><code class="language-plaintext highlighter-rouge">git push</code></li>
+</ul>
+
+<p>And that’s it, that’s all you need to update your website!</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p style="text-align: center">
+CONGRATULATIONS!<br />
+We made a cool blog together!<br />
+Enjoy your new blog.<br />
+</p>
+
+<p>And just like that, we covered basically EVERYTHING you need to create a Jekyll blog, manage it, and publish it, in this comprehensive guide, we learned together:</p>
+
+<ul>
+  <li>What Jekyll is, its features, and what is a static site.</li>
+  <li>How to create a Jekyll blog, and run it.</li>
+  <li>How to create a post, and what is the <code class="language-plaintext highlighter-rouge">Front Matter</code>.</li>
+  <li>How to work with images, how to organize our posts in folders, and work with drafts.</li>
+  <li>We learned to customize our blog at a basic level.</li>
+  <li>How to install themes and plugins.</li>
+  <li>How to host our blog in Github Pages.</li>
+  <li>How to publish our changes.</li>
+</ul>
+
+<p>Now, you’re well equipped to create your blog, pretty cool huh?</p>
+
+<h2 id="sources">Sources</h2>
+
+<p>Giraffe Academy’s series on Jekyll, invaluable help for me to write this post, and to make this very site: <a href="https://www.youtube.com/playlist?list=PLLAZ4kZ9dFpOPV5C5Ay0pHaa0RJFhcmcB">https://www.youtube.com/playlist?list=PLLAZ4kZ9dFpOPV5C5Ay0pHaa0RJFhcmcB</a></p>
+
+<p>Cloudfare’s website’s definition of a Static Site Generator: <a href="https://www.cloudflare.com/learning/performance/static-site-generator/">https://www.cloudflare.com/learning/performance/static-site-generator/</a></p>
+
+<p>Gitlab’s blog post about the differences of a dynamic and a static website: <a href="https://about.gitlab.com/blog/2016/06/03/ssg-overview-gitlab-pages-part-1-dynamic-x-static/">https://about.gitlab.com/blog/2016/06/03/ssg-overview-gitlab-pages-part-1-dynamic-x-static/</a></p>]]></content><author><name></name></author><summary type="html"><![CDATA[Hello there, today, I’m going to show you how to make a Jekyll blog from scratch, and take you all the way through a fully realized blog, with a theme, and maybe some plugins installed, in other words, this is a comprehensive guide to Jekyll.]]></summary></entry></feed>
